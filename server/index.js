@@ -3,12 +3,12 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
+import { upload, ctrlWrapper } from "./middlewares/index.js";
 import { fileURLToPath } from "url";
-import { register } from "./controllers/auth.js";
+import { register } from "./controllers/auth/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,18 +23,16 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/assets");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
+app.post("/auth/register", upload.single("picture"), ctrlWrapper(register));
+
+app.use((_, res) => {
+  res.status(404).json({ message: "Not found" });
 });
 
-const upload = multer({ storage });
-
-app.post("/auth/register", upload.single("picture", register));
+app.use((err, req, res, next) => {
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
+});
 
 const { MONGO_URL, PORT = 6001 } = process.env;
 
