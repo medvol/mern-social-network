@@ -5,7 +5,16 @@ import User from "../../models/User.js";
 const { Conflict } = errors;
 
 export const register = async (req, res) => {
-  const { email, password } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    picturePath,
+    location,
+    occupation,
+  } = req.body;
+
   const user = await User.findOne({ email });
   if (user) {
     throw new Conflict("Email in use");
@@ -21,8 +30,13 @@ export const register = async (req, res) => {
     impressions: Math.floor(Math.random() * 10000),
   });
   const savedUser = await newUser.save();
-    res.status(201).json({
-        ...savedUser,
-        password: null
-    });
+  res.status(201).json({
+    firstName,
+    lastName,
+    email,
+    picturePath,
+    friends: savedUser.friends,
+    location,
+    occupation,
+  });
 };
