@@ -8,7 +8,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-
+import { register } from "./controllers/auth.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,6 +33,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+app.post("/auth/register", upload.single("picture", register));
 
 const { MONGO_URL, PORT = 6001 } = process.env;
 
