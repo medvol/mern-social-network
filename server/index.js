@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
-import { authRoutes, userRoutes } from "./routes/index.js";
+import { authRoutes, userRoutes, postRoutes } from "./routes/index.js";
 import { upload, ctrlWrapper } from "./middlewares/index.js";
 import { fileURLToPath } from "url";
 import { register } from "./controllers/auth/index.js";
@@ -28,6 +28,7 @@ app.post("/auth/register", upload.single("picture"), ctrlWrapper(register));
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Not found" });
