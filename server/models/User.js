@@ -24,6 +24,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Set password for user"],
       min: 5,
+      default: null,
     },
     picturePath: {
       type: String,
