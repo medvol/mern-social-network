@@ -30,6 +30,7 @@ export const register = async (req, res) => {
     impressions: Math.floor(Math.random() * 10000),
   });
   const savedUser = await newUser.save();
+  delete savedUser.password
   res.status(201).json({
     firstName,
     lastName,
@@ -38,5 +39,8 @@ export const register = async (req, res) => {
     friends: savedUser.friends,
     location,
     occupation,
+    createdAt: savedUser.createdAt,
+    updatedAt: savedUser.updatedAt,
+    _id:savedUser._id
   });
 };
