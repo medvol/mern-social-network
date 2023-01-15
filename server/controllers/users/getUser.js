@@ -1,7 +1,8 @@
 import errors from "http-errors";
-const { NotFound } = errors;
 import User from "../../models/User.js";
 import { UserWithoutPassword } from "../../helpers/UserWithoutPassword.js";
+
+const { NotFound } = errors;
 
 export const getUser = async (req, res) => {
   const { id } = req.params;
