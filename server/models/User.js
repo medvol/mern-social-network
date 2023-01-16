@@ -4,13 +4,13 @@ const UserSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: true,
+      required: [true, "firstName is required"],
       min: 2,
       max: 50,
     },
     lastName: {
       type: String,
-      required: true,
+      required: [true, "lastName is required"],
       min: 2,
       max: 50,
     },

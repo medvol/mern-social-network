@@ -7,9 +7,10 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { authRoutes, userRoutes, postRoutes } from "./routes/index.js";
-import { upload, ctrlWrapper } from "./middlewares/index.js";
+import { upload, ctrlWrapper, verifyToken } from "./middlewares/index.js";
 import { fileURLToPath } from "url";
 import { register } from "./controllers/auth/index.js";
+import { createPost } from "./controllers/posts/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,6 +26,7 @@ app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 app.post("/auth/register", upload.single("picture"), ctrlWrapper(register));
+app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
