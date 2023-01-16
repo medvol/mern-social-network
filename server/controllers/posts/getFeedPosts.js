@@ -1,6 +1,5 @@
 import errors from "http-errors";
 import Post from "../../models/Post.js";
-import User from "../../models/User.js";
 
 const { NotFound } = errors;
 
