@@ -4,11 +4,13 @@ import { PagePoutes } from "components/PageRoutes/PagePoutes";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Suspense fallback={null}>
-        <PagePoutes />
-      </Suspense>
-    </BrowserRouter>
+    <div className="app">
+      <BrowserRouter>
+        <Suspense fallback={null}>
+          <PagePoutes />
+        </Suspense>
+      </BrowserRouter>
+    </div>
   );
 }
 
