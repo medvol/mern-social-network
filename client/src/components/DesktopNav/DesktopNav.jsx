@@ -1,4 +1,4 @@
-import FlexBetween from "components/FlexBetween/FlexBetween.styled";
+import {FlexBetween} from "components/FlexBetween/FlexBetween.styled";
 import { MenuItems } from "components/MenuItems/MenuItems";
 
 export const DesktopNav = () => {

@@ -1,6 +1,6 @@
 import { IconButton, InputBase, useTheme } from "@mui/material";
 import { Search } from "@mui/icons-material";
-import FlexBetween from "components/FlexBetween/FlexBetween.styled";
+import {FlexBetween} from "components/FlexBetween/FlexBetween.styled";
 
 export const SearchNav = () => {
   const theme = useTheme();

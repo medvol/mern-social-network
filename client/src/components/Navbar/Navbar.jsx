@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useTheme, useMediaQuery } from "@mui/material";
-import FlexBetween from "components/FlexBetween/FlexBetween.styled";
+import {FlexBetween} from "components/FlexBetween/FlexBetween.styled";
 import { Logo } from "components/Logo/Logo";
 import { SearchNav } from "components/SearchNav/SearchNav";
 import { DesktopNav } from "components/DesktopNav/DesktopNav";
 import { MobileMenuButton } from "components/MobileMenuButton/MobileMenuButton";
 import { MobileNav } from "components/MobileNav/MobileNav";
 
-const Navbar = () => {
+export const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
@@ -41,4 +41,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+

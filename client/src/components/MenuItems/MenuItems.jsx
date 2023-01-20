@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Message, Notifications, Help } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
-import { setLogout } from "state";
+import { setLogout } from "state/auth/authSlice";
 import { ModeButton } from "components/ModeButton/ModeButton";
 import { useAuth } from "hooks/useAuth";
 
@@ -19,7 +19,9 @@ export const MenuItems = () => {
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
 
-  const fullName = `${user.firstName} ${user.lastName}`;
+  const fullName = "Oleh"
+
+  // const fullName = `${user.firstName} ${user.lastName}`;
   return (
     <>
       <ModeButton />

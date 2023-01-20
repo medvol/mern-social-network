@@ -1,7 +1,7 @@
 import { Box, IconButton, useTheme } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { MenuItems } from "components/MenuItems/MenuItems";
-import { FlexBetween } from "components/FlexBetween";
+import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
 
 export const MobileNav = ({ onClick }) => {
   const theme = useTheme();
