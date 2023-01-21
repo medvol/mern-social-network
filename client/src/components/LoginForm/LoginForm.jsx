@@ -31,7 +31,6 @@ export const LoginForm = () => {
       })
     );
     onSubmitProps.resetForm();
-    navigate("/home");
   };
 
   return (
