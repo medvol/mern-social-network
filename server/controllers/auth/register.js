@@ -9,7 +9,7 @@ export const register = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
-  if (!user) {
+  if (user) {
     throw new Conflict("Email in use");
   }
 
@@ -24,5 +24,7 @@ export const register = async (req, res) => {
   });
   const savedUser = await newUser.save();
   const returnedUser = UserWithoutPassword(savedUser);
-  res.status(201).json(returnedUser);
+  res.status(201).json({
+    user: returnedUser,
+  });
 };

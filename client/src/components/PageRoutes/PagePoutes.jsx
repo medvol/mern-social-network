@@ -1,6 +1,5 @@
 import { lazy } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useAuth } from "hooks/useAuth";
 import { RestrictedRoute } from "components/RestrictedRoute";
 
@@ -18,8 +17,8 @@ export const PagePoutes = () => {
     <Routes>
       <Route element={<RestrictedRoute redirectTo="/home" />}>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
       </Route>
+      <Route path="/register" element={<RegisterPage />} />
 
       <Route path="/home" element={<HomePage />} />
       <Route

@@ -7,17 +7,17 @@ import {
   useTheme,
 } from "@mui/material";
 import { Message, Notifications, Help } from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLogout } from "state/auth/authSlice";
 import { ModeButton } from "components/ModeButton/ModeButton";
 import { useAuth } from "hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export const MenuItems = () => {
   const dispatch = useDispatch();
-  // const { user } = useAuth();
-  // console.log(user);
-  const user = useSelector((state) => state.auth.user);
-  console.log(user);
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
 
@@ -49,7 +49,14 @@ export const MenuItems = () => {
           <MenuItem value={fullName}>
             <Typography>{fullName}</Typography>
           </MenuItem>
-          <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
+          <MenuItem
+            onClick={() => {
+              dispatch(setLogout());
+              navigate("/");
+            }}
+          >
+            Log Out
+          </MenuItem>
         </Select>
       </FormControl>
     </>

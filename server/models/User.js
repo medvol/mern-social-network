@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+const emailRegexp = /^(?=.{10,63}$)([A-Za-z0-9._-]{2,}@[A-Za-z0-9._-]{2,})$/;
+
 const UserSchema = new mongoose.Schema(
   {
     firstName: {
@@ -16,9 +18,12 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
+      match: emailRegexp,
+      unique: true,
+      trim: true,
+      lowercase: true,
       required: [true, "Email is required"],
       max: 50,
-      unique: true,
     },
     password: {
       type: String,
