@@ -9,11 +9,13 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email: email });
-  if (user) {
-    const isMatch = await bcrypt.compare(password, user.password);
+  if (!user) {
+    throw new Unauthorized("Email or password is wrong");
   }
 
-  if (!user || !isMatch) {
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if (!isMatch) {
     throw new Unauthorized("Email or password is wrong");
   }
 
