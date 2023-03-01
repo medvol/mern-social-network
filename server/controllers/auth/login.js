@@ -7,8 +7,12 @@ const { Unauthorized } = errors;
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
+
   const user = await User.findOne({ email: email });
-  const isMatch = await bcrypt.compare(password, user.password);
+  if (user) {
+    const isMatch = await bcrypt.compare(password, user.password);
+  }
+
   if (!user || !isMatch) {
     throw new Unauthorized("Email or password is wrong");
   }

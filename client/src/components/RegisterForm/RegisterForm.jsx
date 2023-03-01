@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   Box,
-  Button,
   TextField,
   useMediaQuery,
   Typography,
@@ -44,7 +43,7 @@ export const RegisterForm = () => {
       formData.append(value, values[value]);
     }
     formData.append("picturePath", values.picture.name);
-    
+
     dispatch(register(formData));
     toggleModal();
     onSubmitProps.resetForm();

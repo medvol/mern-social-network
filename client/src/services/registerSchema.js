@@ -6,7 +6,10 @@ export const registerSchema = yup.object().shape({
   lastName: yup.string().required("required"),
   email: yup
     .string()
-    .pattern(emailRegexp)
+    .matches(
+      emailRegexp,
+      "Email must use only letters, numbers, dots, underscores or hyphens and contain @ and com"
+    )
     .email("invalid email")
     .required("required"),
   password: yup.string().required("required"),

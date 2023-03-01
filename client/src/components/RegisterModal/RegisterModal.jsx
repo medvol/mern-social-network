@@ -20,9 +20,9 @@ export function RegisterModal() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const user = useAuth();
+  const {user} = useAuth();
   const { palette } = useTheme();
-  console.log(user);
+  
   return (
     <div>
       <Button
