@@ -26,7 +26,6 @@ export const LoginForm = () => {
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  console.log(errorNotification, "in component");
   const handleFormSubmit = async (values, onSubmitProps) => {
     setErrorNotification(false);
     const response = await dispatch(
@@ -35,9 +34,9 @@ export const LoginForm = () => {
         password: values.password,
       })
     );
-   
+
     if (response.error) {
-      setErrorNotification(true);      
+      setErrorNotification(true);
     }
 
     onSubmitProps.resetForm();
