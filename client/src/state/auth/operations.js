@@ -63,22 +63,23 @@ export const logIn = createAsyncThunk(
  * GET @ /users/current
  * headers: Authorization: Bearer token
  */
-// export const refreshUser = createAsyncThunk(
-//   "auth/refresh",
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistedToken = state.auth.token;
+export const refreshUser = createAsyncThunk(
+  "auth/refresh",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
 
-//     if (persistedToken === null) {
-//       return thunkAPI.rejectWithValue("Unable to fetch user");
-//     }
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue("Unable to fetch user");
+    }
 
-//     try {
-//       setAuthHeader(persistedToken);
-//       const res = await axios.get("/users/current");
-//       return res.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+    try {
+      setAuthHeader(persistedToken);
+      const res = await axios.get("/users/current");
+      return res.data;
+    } catch (error) {
+      console.log(error)
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
