@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, logIn, refreshUser } from "./operations";
+import { register, logIn, refreshUser, logOut } from "./operations";
 
 const initialState = {
   mode: "light",
@@ -16,11 +16,7 @@ const authSlice = createSlice({
     setMode: (state) => {
       state.mode = state.mode === "light" ? "dark" : "light";
     },
-    setLogout: (state) => {
-      state.user = null;
-      state.token = null;
-      state.isLoggedIn = false;
-    },
+
     setFriends: (state, action) => {
       if (state.user) {
         state.user.friends = action.payload.friends;
@@ -33,18 +29,17 @@ const authSlice = createSlice({
     [register.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
-     
     },
     [logIn.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
     },
-    // [logOut.fulfilled](state) {
-    //   state.user = { name: null, email: null };
-    //   state.token = null;
-    //   state.isLoggedIn = false;
-    // },
+    [logOut.fulfilled](state) {
+      state.user = null;
+      state.token = null;
+      state.isLoggedIn = false;
+    },
     [refreshUser.pending](state) {
       state.isRefreshing = true;
     },
@@ -86,5 +81,5 @@ const authSlice = createSlice({
 //   },
 // });
 
-export const { setMode, setLogout, setFriends } = authSlice.actions;
+export const { setMode, setFriends } = authSlice.actions;
 export default authSlice.reducer;
