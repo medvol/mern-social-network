@@ -1,11 +1,14 @@
-import { Navbar } from "components/Navbar/Navbar";
 import { Box } from "@mui/material";
-import Loader from "components/Loader/Loader";
+import { Navbar } from "components/Navbar/Navbar";
+import UserWidget from "components/UserWidget/UserWidget";
 
 export default function HomePage() {
-  return <Box as="header">
-    <Navbar />
-    <Loader/>
-  </Box>;
+  return (
+    <>
+      <Box as="header">
+        <Navbar />
+      </Box>
+      <UserWidget />
+    </>
+  );
 }
- 

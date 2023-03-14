@@ -1,6 +1,5 @@
 import { lazy } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import { useAuth } from "hooks/useAuth";
+import { Route, Routes } from "react-router-dom";
 import { RestrictedRoute } from "components/RestrictedRoute";
 import { PrivateRoute } from "components/PrivateRoute";
 
@@ -11,9 +10,6 @@ const ProfilePage = lazy(() => import("pages/ProfilePage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 
 export const PagePoutes = () => {
-  // const isAuth = Boolean(useSelector((state) => state.token));
-  const { isLoggedIn } = useAuth();
-  // console.log(isLoggedIn);
   return (
     <Routes>
       <Route element={<RestrictedRoute redirectTo="/home" />}>
@@ -22,12 +18,8 @@ export const PagePoutes = () => {
       </Route>
       <Route element={<PrivateRoute redirectTo="/" />}>
         <Route path="/home" element={<HomePage />} />
-        <Route
-          path="/profile/:userId"
-          element={isLoggedIn ? <ProfilePage /> : <Navigate to="/" />}
-        />
+        <Route path="/profile/:userId" element={<ProfilePage />} />
       </Route>
-
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
