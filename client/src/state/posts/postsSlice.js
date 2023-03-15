@@ -48,12 +48,12 @@ export const postsSlice = createSlice({
     [getUserPosts.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.posts = action.payload.posts;
+      state.posts = action.payload;
     },
     [addPost.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.posts.push(action.payload.post);
+      state.posts.push(action.payload);
     },
   },
 });

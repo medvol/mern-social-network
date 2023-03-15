@@ -1,13 +1,20 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Box, useMediaQuery } from "@mui/material";
 import { Navbar } from "components/Navbar/Navbar";
 import UserWidget from "components/UserWidget/UserWidget";
-import MyPostWidget from "components/MyPostWidget/MyPostWidget";
+import AddPostWidget from "components/AddPostWidget/AddPostWidget";
 import { useAuth } from "hooks/useAuth";
+import { getUserPosts } from "state/posts/operations";
 
 export default function HomePage() {
+  const dispatch = useDispatch();
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const { user } = useAuth();
-  const {picturePath}= user
+
+  useEffect(() => {
+    dispatch(getUserPosts(user._id));
+  }, [dispatch, user._id]);
 
   return (
     <>
@@ -28,7 +35,7 @@ export default function HomePage() {
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <MyPostWidget picturePath={picturePath} />
+          <AddPostWidget />
         </Box>
         {isNonMobileScreens && <Box flexBasis="26%"></Box>}
       </Box>

@@ -26,7 +26,7 @@ import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
 import { addPost } from "state/posts/operations";
 import { useAuth } from "hooks/useAuth";
 
-const MyPostWidget = ({ picturePath }) => {
+const AddPostWidget = () => {
   const dispatch = useDispatch();
   const [isImage, setIsImage] = useState(false);
   const [image, setImage] = useState(null);
@@ -39,7 +39,7 @@ const MyPostWidget = ({ picturePath }) => {
 
   const handlePost = async () => {
     const formData = new FormData();
-    formData.append("userId", user._id);
+
     formData.append("description", post);
     if (image) {
       formData.append("picture", image);
@@ -53,7 +53,7 @@ const MyPostWidget = ({ picturePath }) => {
   return (
     <WidgetWrapper>
       <FlexBetween gap="1.5rem">
-        <UserImage image={picturePath} />
+        <UserImage image={user.picturePath} />
         <InputBase
           placeholder="What's on your mind..."
           onChange={(e) => setPost(e.target.value)}
@@ -163,4 +163,4 @@ const MyPostWidget = ({ picturePath }) => {
   );
 };
 
-export default MyPostWidget;
+export default AddPostWidget;

@@ -1,5 +1,4 @@
 import Post from "../../models/Post.js";
-import User from "../../models/User.js";
 
 export const createPost = async (req, res) => {
   const { _id: owner } = req.user;
@@ -12,6 +11,5 @@ export const createPost = async (req, res) => {
   });
   await newPost.save();
 
-  // const allPosts = await Post.find();
   res.status(201).json(newPost);
 };
