@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getAllPosts, getUserPosts, addPost } from "./operations";
 
 const initialState = {
   posts: [],
@@ -6,20 +7,19 @@ const initialState = {
   error: null,
 };
 
+const handlePending = (state) => {
+  state.isLoading = true;
+};
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    setPosts: (state, action) => {
-      state.isLoading = false;
-      state.error = null;
-      state.posts = action.payload.posts;
-    },
-    addPost: (state, action) => {
-      state.isLoading = false;
-      state.error = null;
-      state.posts.push(action.payload.post);
-    },
+   
     setPost: (state, action) => {
       const updatedPosts = state.posts.map((post) => {
         if (post._id === action.payload.post._id) return action.payload.post;
@@ -30,7 +30,33 @@ export const postsSlice = createSlice({
       state.posts = updatedPosts;
     },
   },
+
+  extraReducers: {
+    [getAllPosts.pending]: handlePending,
+    [getUserPosts.pending]: handlePending,
+    [addPost.pending]: handlePending,
+
+    [getAllPosts.rejected]: handleRejected,
+    [getUserPosts.pending]: handleRejected,
+    [addPost.pending]: handleRejected,
+
+    [getAllPosts.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.posts = action.payload.posts;
+    },
+    [getUserPosts.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.posts = action.payload.posts;
+    },
+    [addPost.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.posts.push(action.payload.post);
+    },
+  },
 });
 
-export const { setPosts, setPost, addPost } = postsSlice.actions;
+export const { setPost } = postsSlice.actions;
 export default postsSlice.reducer;

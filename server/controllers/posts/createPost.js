@@ -17,6 +17,6 @@ export const createPost = async (req, res) => {
   });
   await newPost.save();
 
-  const allPosts = await Post.find();
-  res.status(201).json(allPosts);
+  // const allPosts = await Post.find();
+  res.status(201).json(newPost);
 };

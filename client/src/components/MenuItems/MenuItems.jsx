@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Message, Notifications, Help } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
-import { setLogout } from "state/auth/authSlice";
+import { logOut } from "state/auth/operations";
 import { ModeButton } from "components/ModeButton/ModeButton";
 import { useAuth } from "hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -51,7 +51,7 @@ export const MenuItems = () => {
           </MenuItem>
           <MenuItem
             onClick={() => {
-              dispatch(setLogout());
+              dispatch(logOut());
               navigate("/");
             }}
           >
