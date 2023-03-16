@@ -1,20 +1,10 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Box, useMediaQuery } from "@mui/material";
 import { Navbar } from "components/Navbar/Navbar";
 import UserWidget from "components/UserWidget/UserWidget";
 import AddPostWidget from "components/AddPostWidget/AddPostWidget";
-import { useAuth } from "hooks/useAuth";
-import { getAllPosts } from "state/posts/operations";
 
 export default function HomePage() {
-  const dispatch = useDispatch();
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
-  const { user } = useAuth();
-
-  useEffect(() => {
-    dispatch(getAllPosts());
-  }, [dispatch]);
 
   return (
     <>
@@ -29,7 +19,7 @@ export default function HomePage() {
         justifyContent="space-between"
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <UserWidget user={user} />
+          <UserWidget />
         </Box>
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}

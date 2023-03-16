@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getAllPosts, getUserPosts, addPost } from "./operations";
 
 const initialState = {
-  posts: [],
+  items: [],
   isLoading: false,
   error: null,
 };
@@ -27,7 +27,7 @@ export const postsSlice = createSlice({
       });
       state.isLoading = false;
       state.error = null;
-      state.posts = updatedPosts;
+      state.items = updatedPosts;
     },
   },
 
@@ -43,17 +43,17 @@ export const postsSlice = createSlice({
     [getAllPosts.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.posts = action.payload;
+      state.items = action.payload;
     },
     [getUserPosts.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.posts = action.payload;
+      state.items = action.payload;
     },
     [addPost.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.posts.push(action.payload);
+      state.items.push(action.payload);
     },
   },
 });
