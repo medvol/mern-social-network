@@ -2,7 +2,7 @@ import express from "express";
 import {
   getUser,
   getUserFriends,
-  addRemoveFriend,
+  addFriend,
   getCurrent,
 } from "../controllers/users/index.js";
 import { verifyToken, isValidId, ctrlWrapper } from "../middlewares/index.js";
@@ -19,7 +19,7 @@ router.patch(
   "/:id/:friendId",
   isValidId,
   verifyToken,
-  ctrlWrapper(addRemoveFriend)
+  ctrlWrapper(addFriend)
 );
 
 export default router;

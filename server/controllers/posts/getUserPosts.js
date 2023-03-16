@@ -4,13 +4,16 @@ import Post from "../../models/Post.js";
 const { NotFound } = errors;
 
 export const getUserPosts = async (req, res) => {
-  const { userId } = req.params;
+  const { id } = req.params;
   const { page = 1, limit = 20 } = req.query;
   const skip = (page - 1) * limit;
   const posts = await Post.find(
-    { owner: userId },
+    { owner: id },
     { skip, limit: Number(limit) }
-  ).populate("owner");
+  ).populate(
+    "owner",
+    " _id firstName lastName occupation location picturePath"
+  );
   if (!posts) {
     throw new NotFound("Not found posts");
   }
