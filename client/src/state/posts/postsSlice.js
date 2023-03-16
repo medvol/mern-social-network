@@ -43,7 +43,7 @@ export const postsSlice = createSlice({
     [getAllPosts.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.posts = action.payload.posts;
+      state.posts = action.payload;
     },
     [getUserPosts.fulfilled](state, action) {
       state.isLoading = false;

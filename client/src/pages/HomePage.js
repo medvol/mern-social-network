@@ -5,7 +5,7 @@ import { Navbar } from "components/Navbar/Navbar";
 import UserWidget from "components/UserWidget/UserWidget";
 import AddPostWidget from "components/AddPostWidget/AddPostWidget";
 import { useAuth } from "hooks/useAuth";
-import { getUserPosts } from "state/posts/operations";
+import { getAllPosts } from "state/posts/operations";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -13,8 +13,8 @@ export default function HomePage() {
   const { user } = useAuth();
 
   useEffect(() => {
-    dispatch(getUserPosts(user._id));
-  }, [dispatch, user._id]);
+    dispatch(getAllPosts());
+  }, [dispatch]);
 
   return (
     <>
