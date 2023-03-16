@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import errors from "http-errors";
 import User from "../../models/User.js";
-import { UserWithoutPassword } from "../../helpers/UserWithoutPassword.js";
 const { Unauthorized } = errors;
 
 export const login = async (req, res) => {
@@ -23,11 +22,14 @@ export const login = async (req, res) => {
     expiresIn: "24h",
   });
 
-  await User.findByIdAndUpdate(user._id, { token });
-  const returnedUser = UserWithoutPassword(user);
+  const updateUser = await User.findByIdAndUpdate(
+    user._id,
+    { token },
+    { new: true, select: "-password" }
+  );
 
   res.json({
     token,
-    user: returnedUser,
+    user: updateUser,
   });
 };

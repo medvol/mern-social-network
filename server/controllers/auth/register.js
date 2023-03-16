@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import errors from "http-errors";
 import User from "../../models/User.js";
-import { UserWithoutPassword } from "../../helpers/UserWithoutPassword.js";
+import {UserWithoutPassword} from "../../helpers/UserWithoutPassword.js"
 
 const { Conflict } = errors;
 

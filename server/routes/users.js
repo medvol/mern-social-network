@@ -4,6 +4,7 @@ import {
   getUserFriends,
   addFriend,
   getCurrent,
+  deleteFriend
 } from "../controllers/users/index.js";
 import { verifyToken, isValidId, ctrlWrapper } from "../middlewares/index.js";
 
@@ -21,5 +22,7 @@ router.patch(
   verifyToken,
   ctrlWrapper(addFriend)
 );
+router.delete("/:id/:friendId", isValidId, verifyToken, ctrlWrapper(deleteFriend));
+
 
 export default router;
