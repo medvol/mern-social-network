@@ -3,8 +3,8 @@ import Post from "../../models/Post.js";
 
 const { NotFound } = errors;
 
-export const getFeedPosts = async (req, res) => {
-  const post = await Post.find();
+export const getAllPosts = async (req, res) => {
+  const post = await Post.find().populate('owner');
 
   if (!post) {
     throw new NotFound("Not found posts");

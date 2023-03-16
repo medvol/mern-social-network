@@ -5,9 +5,9 @@ const { NotFound } = errors;
 
 export const getUserPosts = async (req, res) => {
   const { userId } = req.params;
-  const post = await Post.find({ userId });
-  if (!post) {
+  const posts = await Post.find({ owner:userId });
+  if (!posts) {
     throw new NotFound("Not found posts");
   }
-  res.status(200).json(post);
+  res.status(200).json(posts);
 };
