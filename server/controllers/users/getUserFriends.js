@@ -5,19 +5,16 @@ const { NotFound } = errors;
 
 export const getUserFriends = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate(
+    "friends",
+    " _id firstName lastName occupation location picturePath"
+  );
   if (!user) {
     throw new NotFound("Not found user");
   }
 
-  const friends = await Promise.all(
-    user.friends.map((id) => User.findById(id))
-  );
+  const friends = user.friends
 
-  const formattedFriends = friends.map(
-    ({ _id, firstName, lastName, occupation, location, picturePath }) => {
-      return { _id, firstName, lastName, occupation, location, picturePath };
-    }
-  );
-  res.json(formattedFriends);
+  
+  res.json(friends);
 };
