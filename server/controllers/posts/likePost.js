@@ -12,17 +12,15 @@ export const likePost = async (req, res) => {
     throw new NotFound("Not found posts");
   }
 
-  const isLiked = post.likes.includes(userId);
+  const userIdIndex = post.likes.indexOf(userId);
 
-  if (isLiked) {
-    throw new Conflict("You already liked this post");
+  if (userIdIndex !== -1) {
+    post.likes.splice(userIdIndex, 1);
+  } else {
+    post.likes.push(userId);
   }
 
-  const updatedLikes = [...post.likes, userId];
-  const update = { $set: { likes: updatedLikes } };
-  const updatedPost = await Post.findByIdAndUpdate({ _id: id }, update, {
-    new: true,
-  });
+  const updatedPost = await post.save();
 
   res.status(200).json(updatedPost);
 };
