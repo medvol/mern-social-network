@@ -8,14 +8,20 @@ const postSchema = mongoose.Schema(
       required: true,
     },
 
-    description: String,
+    description: {
+      type: String,
+      minLength: 2,
+      maxlength: 500,
+    },
 
     picturePath: String,
 
-    likes: {
-      type: Map,
-      of: Boolean,
-    },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     comments: {
       type: Array,
       default: [],

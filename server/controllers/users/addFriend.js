@@ -1,11 +1,20 @@
 import errors from "http-errors";
 import User from "../../models/User.js";
 
-const { NotFound } = errors;
+const { NotFound, Conflict } = errors;
 
 export const addFriend = async (req, res) => {
   const { id, friendId } = req.params;
-  const user = await User.findByIdAndUpdate(
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new NotFound("Not found");
+  }
+
+  if (user.friends.includes(friendId)) {
+    throw new Conflict("Already added as friend");
+  }
+  const updateUser = await User.findByIdAndUpdate(
     id,
     { $push: { friends: friendId } },
     { new: true }
@@ -18,9 +27,9 @@ export const addFriend = async (req, res) => {
     { $push: { friends: id } },
     { new: true }
   );
-  if (!user || !friend) {
+  if (!friend) {
     throw new NotFound("Not found");
   }
 
-  res.json(user);
+  res.json(updateUser);
 };
