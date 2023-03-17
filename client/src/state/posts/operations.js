@@ -3,7 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
-
 export const getAllPosts = createAsyncThunk(
   "posts/fetchAll",
   async (_, thunkAPI) => {
@@ -39,3 +38,4 @@ export const addPost = createAsyncThunk(
     }
   }
 );
+

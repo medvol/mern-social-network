@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, logIn, refreshUser, logOut } from "./operations";
+import {
+  register,
+  logIn,
+  refreshUser,
+  logOut,
+  addFriend,
+  deleteFriend,
+} from "./operations";
 
 const initialState = {
   mode: "light",
@@ -9,20 +16,20 @@ const initialState = {
   isRefreshing: false,
 };
 
+const handlePending = (state) => {
+  state.isLoading = true;
+};
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     setMode: (state) => {
       state.mode = state.mode === "light" ? "dark" : "light";
-    },
-
-    setFriends: (state, action) => {
-      if (state.user) {
-        state.user.friends = action.payload.friends;
-      } else {
-        console.error("user friends non-existent :(");
-      }
     },
   },
   extraReducers: {
@@ -50,6 +57,23 @@ const authSlice = createSlice({
     },
     [refreshUser.rejected](state) {
       state.isRefreshing = false;
+    },
+
+    [addFriend.pending]: handlePending,
+    [deleteFriend.pending]: handlePending,
+
+    [addFriend.rejected]: handleRejected,
+    [deleteFriend.pending]: handleRejected,
+
+    [addFriend.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.user = action.payload;
+    },
+    [deleteFriend.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.user = action.payload;
     },
   },
 });

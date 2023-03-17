@@ -19,7 +19,6 @@ export const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-   
     setPost: (state, action) => {
       const updatedPosts = state.posts.map((post) => {
         if (post._id === action.payload.post._id) return action.payload.post;

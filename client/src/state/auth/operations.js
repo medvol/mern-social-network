@@ -65,3 +65,27 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
+
+export const addFriend = createAsyncThunk(
+  "posts/addFriend",
+  async ({ id, friendId }, thunkAPI) => {
+    try {
+      const response = await axios.patch(`/users/${id}/${friendId}`);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const deleteFriend = createAsyncThunk(
+  "posts/deleteFriend",
+  async ({ userId, friendId }, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/users/${userId}/${friendId}`);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
