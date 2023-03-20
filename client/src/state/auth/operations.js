@@ -68,9 +68,9 @@ export const refreshUser = createAsyncThunk(
 
 export const addFriend = createAsyncThunk(
   "posts/addFriend",
-  async ({ id, friendId }, thunkAPI) => {
+  async ({ userId, friendId }, thunkAPI) => {
     try {
-      const response = await axios.patch(`/users/${id}/${friendId}`);
+      const response = await axios.patch(`/users/${userId}/${friendId}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

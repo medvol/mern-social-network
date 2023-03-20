@@ -39,3 +39,14 @@ export const addPost = createAsyncThunk(
   }
 );
 
+export const likePost = createAsyncThunk(
+  "posts/like",
+  async (ownerId, thunkAPI) => {
+    try {
+      const response = await axios.patch(`/posts/${ownerId}/like`);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);

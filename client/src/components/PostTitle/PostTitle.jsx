@@ -21,6 +21,8 @@ const PostTitle = ({ owner }) => {
 
   const isFriend = user.friends.find((friend) => friend._id === _id);
 
+  console.log(user._id)
+
   return (
     <FlexBetween>
       <FlexBetween gap="1rem">
@@ -53,7 +55,7 @@ const PostTitle = ({ owner }) => {
       {isFriend ? (
         <IconButton
           onClick={() =>
-            dispatch(deleteFriend({ userId: user.id, friendId: _id }))
+            dispatch(deleteFriend({ userId: user._id, friendId: _id }))
           }
           sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
         >
@@ -62,7 +64,7 @@ const PostTitle = ({ owner }) => {
       ) : (
         <IconButton
           onClick={() =>
-            dispatch(addFriend({ userId: user.id, friendId: _id }))
+            dispatch(addFriend({ userId: user._id, friendId: _id }))
           }
           sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
         >

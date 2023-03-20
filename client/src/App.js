@@ -10,7 +10,7 @@ import { refreshUser } from "state/auth/operations";
 import Loader from "components/Loader/Loader";
 
 function App() {
-  const { mode, isRefreshing } = useAuth();
+  const { mode, isRefreshing} = useAuth();
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <Loader/>
+    <Loader />
   ) : (
     <div className="app">
       <BrowserRouter>

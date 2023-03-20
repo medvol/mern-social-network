@@ -2,6 +2,7 @@ import { Box, useMediaQuery } from "@mui/material";
 import { Navbar } from "components/Navbar/Navbar";
 import UserWidget from "components/UserWidget/UserWidget";
 import AddPostWidget from "components/AddPostWidget/AddPostWidget";
+import PostList from "components/PostList/PostList";
 
 export default function HomePage() {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -26,6 +27,7 @@ export default function HomePage() {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <AddPostWidget />
+          <PostList/>
         </Box>
         {isNonMobileScreens && <Box flexBasis="26%"></Box>}
       </Box>

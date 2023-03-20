@@ -1,7 +1,7 @@
 import errors from "http-errors";
 import Post from "../../models/Post.js";
 
-const { NotFound, Conflict } = errors;
+const { NotFound } = errors;
 
 export const likePost = async (req, res) => {
   const { id } = req.params;
@@ -19,7 +19,10 @@ export const likePost = async (req, res) => {
   } else {
     post.likes.push(userId);
   }
-
+  post.populate(
+    "owner",
+    " _id firstName lastName occupation location picturePath"
+  );
   const updatedPost = await post.save();
 
   res.status(200).json(updatedPost);
