@@ -26,7 +26,7 @@ const Post = ({ item }) => {
   const primary = palette.primary.main;
 
   return (
-    <WidgetWrapper m="2rem 0">
+    <WidgetWrapper m="2rem 0" component="li">
       <PostTitle owner={owner} />
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
@@ -44,23 +44,23 @@ const Post = ({ item }) => {
         <FlexBetween gap="1rem">
           <FlexBetween gap="0.3rem">
             {isLiked ? (
-              <IconButton onClick={()=>dispatch(likePost(_id))}>
+              <IconButton onClick={() => dispatch(likePost(_id))}>
                 <FavoriteOutlined sx={{ color: primary }} />
               </IconButton>
             ) : (
-              <IconButton onClick={()=>dispatch(likePost(_id))}>
+              <IconButton onClick={() => dispatch(likePost(_id))}>
                 <FavoriteBorderOutlined />
               </IconButton>
             )}
 
-            <Typography>{likeCount}</Typography>
+            <Typography component="span">{likeCount}</Typography>
           </FlexBetween>
 
           <FlexBetween gap="0.3rem">
             <IconButton onClick={() => setIsComments(!isComments)}>
               <ChatBubbleOutlineOutlined />
             </IconButton>
-            <Typography>{comments.length}</Typography>
+            <Typography component="span">{comments.length}</Typography>
           </FlexBetween>
         </FlexBetween>
 
@@ -69,9 +69,9 @@ const Post = ({ item }) => {
         </IconButton>
       </FlexBetween>
       {isComments && (
-        <Box mt="0.5rem">
+        <Box mt="0.5rem" component="ul">
           {comments.map((comment, i) => (
-            <Box key={`${owner.firstName}-${i}`}>
+            <Box key={`${owner.firstName}-${i}`} component="li">
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
                 {comment}

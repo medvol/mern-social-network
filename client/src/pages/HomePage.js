@@ -3,6 +3,7 @@ import { Navbar } from "components/Navbar/Navbar";
 import UserWidget from "components/UserWidget/UserWidget";
 import AddPostWidget from "components/AddPostWidget/AddPostWidget";
 import PostList from "components/PostList/PostList";
+import Advertisement from "components/Advertisement/Advertisement";
 
 export default function HomePage() {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -27,9 +28,14 @@ export default function HomePage() {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <AddPostWidget />
-          <PostList/>
+          <PostList />
         </Box>
-        {isNonMobileScreens && <Box flexBasis="26%"></Box>}
+        {isNonMobileScreens && (
+          <Box flexBasis="26%">
+            <Advertisement />
+            <Box m="2rem 0" />S
+          </Box>
+        )}
       </Box>
     </>
   );

@@ -1,5 +1,5 @@
 import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Typography, useTheme, Tooltip } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
@@ -20,8 +20,6 @@ const PostTitle = ({ owner }) => {
   const medium = palette.neutral.medium;
 
   const isFriend = user.friends.find((friend) => friend._id === _id);
-
-  console.log(user._id)
 
   return (
     <FlexBetween>
@@ -53,23 +51,27 @@ const PostTitle = ({ owner }) => {
       </FlexBetween>
 
       {isFriend ? (
-        <IconButton
-          onClick={() =>
-            dispatch(deleteFriend({ userId: user._id, friendId: _id }))
-          }
-          sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
-        >
-          <PersonRemoveOutlined sx={{ color: primaryDark }} />
-        </IconButton>
+        <Tooltip title="Remove Friend" placement="top-end">
+          <IconButton
+            onClick={() =>
+              dispatch(deleteFriend({ userId: user._id, friendId: _id }))
+            }
+            sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
+          >
+            <PersonRemoveOutlined sx={{ color: primaryDark }} />
+          </IconButton>
+        </Tooltip>
       ) : (
-        <IconButton
-          onClick={() =>
-            dispatch(addFriend({ userId: user._id, friendId: _id }))
-          }
-          sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
-        >
-          <PersonAddOutlined sx={{ color: primaryDark }} />
-        </IconButton>
+        <Tooltip title="Add Friend" placement="top-end">
+          <IconButton
+            onClick={() =>
+              dispatch(addFriend({ userId: user._id, friendId: _id }))
+            }
+            sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
+          >
+            <PersonAddOutlined sx={{ color: primaryDark }} />
+          </IconButton>
+        </Tooltip>
       )}
     </FlexBetween>
   );
