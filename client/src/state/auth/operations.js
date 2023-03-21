@@ -67,7 +67,7 @@ export const refreshUser = createAsyncThunk(
 );
 
 export const addFriend = createAsyncThunk(
-  "posts/addFriend",
+  "auth/addUserFriend",
   async ({ userId, friendId }, thunkAPI) => {
     try {
       const response = await axios.patch(`/users/${userId}/${friendId}`);
@@ -79,7 +79,7 @@ export const addFriend = createAsyncThunk(
 );
 
 export const deleteFriend = createAsyncThunk(
-  "posts/deleteFriend",
+  "auth/deleteUserFriend",
   async ({ userId, friendId }, thunkAPI) => {
     try {
       const response = await axios.delete(`/users/${userId}/${friendId}`);

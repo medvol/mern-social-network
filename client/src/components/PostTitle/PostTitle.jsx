@@ -22,7 +22,7 @@ const PostTitle = ({ owner }) => {
   const isFriend = user.friends.find((friend) => friend._id === _id);
 
   return (
-    <FlexBetween>
+    <FlexBetween >
       <FlexBetween gap="1rem">
         <UserImage image={picturePath} size="55px" />
         <Box
