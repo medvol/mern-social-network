@@ -26,6 +26,9 @@ export const login = async (req, res) => {
     user._id,
     { token },
     { new: true, select: "-password" }
+  ).populate(
+    "friends",
+    " _id firstName lastName occupation location picturePath"
   );
 
   res.json({
