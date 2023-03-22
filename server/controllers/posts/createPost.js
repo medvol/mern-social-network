@@ -5,10 +5,12 @@ export const createPost = async (req, res) => {
 
   const newPost = new Post({
     owner,
-    likes: {},
-    comments: [],
     ...req.body,
   });
+    newPost.populate(
+      "owner",
+      " _id firstName lastName occupation location picturePath"
+    );
   await newPost.save();
 
   res.status(201).json(newPost);

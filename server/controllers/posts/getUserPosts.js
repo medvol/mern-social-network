@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import errors from "http-errors";
 import Post from "../../models/Post.js";
 
@@ -9,11 +10,13 @@ export const getUserPosts = async (req, res) => {
   const skip = (page - 1) * limit;
   const posts = await Post.find(
     { owner: id },
-    { skip, limit: Number(limit) }
-  ).populate(
-    "owner",
-    " _id firstName lastName occupation location picturePath"
-  );
+    {},
+    {
+      skip,
+      limit: Number(limit),
+    }
+  ).populate("owner", "_id firstName lastName occupation location picturePath");
+  console.log(posts);
   if (!posts) {
     throw new NotFound("Not found posts");
   }

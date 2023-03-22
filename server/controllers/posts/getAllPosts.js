@@ -12,7 +12,7 @@ export const getAllPosts = async (req, res) => {
     limit: Number(limit),
   }).populate(
     "owner",
-    " _id firstName lastName occupation location picturePath"
+    "_id firstName lastName occupation location picturePath"
   );
 
   if (!posts) {
