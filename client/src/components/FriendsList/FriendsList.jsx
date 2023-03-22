@@ -1,11 +1,9 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import PostTitle from "components/PostTitle/PostTitle";
 import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
-import { useAuth } from "hooks/useAuth";
 
-const FriendsList = () => {
+const FriendsList = ({ user }) => {
   const { palette } = useTheme();
-  const { user } = useAuth();
 
   return (
     <WidgetWrapper>

@@ -1,13 +1,15 @@
 import { Box, useMediaQuery } from "@mui/material";
-import { Navbar } from "components/Navbar/Navbar";
+import Navbar from "components/Navbar/Navbar";
 import UserWidget from "components/UserWidget/UserWidget";
 import AddPostWidget from "components/AddPostWidget/AddPostWidget";
 import PostList from "components/PostList/PostList";
 import Advertisement from "components/Advertisement/Advertisement";
 import FriendsList from "components/FriendsList/FriendsList";
+import { useAuth } from "hooks/useAuth";
 
 export default function HomePage() {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
+  const { user } = useAuth();
 
   return (
     <>
@@ -22,20 +24,20 @@ export default function HomePage() {
         justifyContent="space-between"
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <UserWidget />
+          <UserWidget user={user} />
         </Box>
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <AddPostWidget />
-          <PostList />
+          <PostList user={user} />
         </Box>
         {isNonMobileScreens && (
           <Box flexBasis="26%">
             <Advertisement />
             <Box m="2rem 0" />
-            <FriendsList/>
+            <FriendsList user={user} />
           </Box>
         )}
       </Box>

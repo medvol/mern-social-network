@@ -24,5 +24,3 @@ export const PagePoutes = () => {
     </Routes>
   );
 };
-
-// isAuth ? <HomePage /> : <Navigate to="/" />

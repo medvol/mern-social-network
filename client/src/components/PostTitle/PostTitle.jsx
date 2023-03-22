@@ -22,7 +22,7 @@ const PostTitle = ({ owner }) => {
   const isFriend = user.friends.find((friend) => friend._id === _id);
 
   return (
-    <FlexBetween >
+    <FlexBetween>
       <FlexBetween gap="1rem">
         <UserImage image={picturePath} size="55px" />
         <Box
@@ -49,8 +49,7 @@ const PostTitle = ({ owner }) => {
           </Typography>
         </Box>
       </FlexBetween>
-
-      {isFriend ? (
+      {isFriend && user._id !== owner._id && (
         <Tooltip title="Remove Friend" placement="top-end">
           <IconButton
             onClick={() =>
@@ -61,7 +60,8 @@ const PostTitle = ({ owner }) => {
             <PersonRemoveOutlined sx={{ color: primaryDark }} />
           </IconButton>
         </Tooltip>
-      ) : (
+      )}
+      {!isFriend && user._id !== owner._id && (
         <Tooltip title="Add Friend" placement="top-end">
           <IconButton
             onClick={() =>
@@ -72,7 +72,7 @@ const PostTitle = ({ owner }) => {
             <PersonAddOutlined sx={{ color: primaryDark }} />
           </IconButton>
         </Tooltip>
-      )}
+      )}{" "}
     </FlexBetween>
   );
 };

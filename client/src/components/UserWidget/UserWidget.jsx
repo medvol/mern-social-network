@@ -9,15 +9,13 @@ import { Box, Typography, Divider, useTheme } from "@mui/material";
 import UserImage from "components/UserImage/UserImage";
 import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
 import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
-import { useAuth } from "hooks/useAuth";
 
-const UserWidget = () => {
+const UserWidget = ({ user }) => {
   const { palette } = useTheme();
   const navigate = useNavigate();
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
-  const { user } = useAuth();
 
   if (!user) {
     return null;
