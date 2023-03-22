@@ -17,7 +17,7 @@ export const addFriend = async (req, res) => {
   const updateUser = await User.findByIdAndUpdate(
     id,
     { $push: { friends: friendId } },
-    { new: true }
+    { new: true, select: "-password"  }
   ).populate(
     "friends",
     " _id firstName lastName occupation location picturePath"

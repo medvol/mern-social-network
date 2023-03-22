@@ -17,7 +17,7 @@ export const deleteFriend = async (req, res) => {
   const updateUser = await User.findByIdAndUpdate(
     id,
     { $pull: { friends: friendId } },
-    { new: true }
+    { new: true, select: "-password" }
   ).populate(
     "friends",
     " _id firstName lastName occupation location picturePath"
