@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme, useMediaQuery } from "@mui/material";
-import {FlexBetween} from "components/FlexBetween/FlexBetween.styled";
+import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
 import { Logo } from "components/Logo/Logo";
 import { SearchNav } from "components/SearchNav/SearchNav";
 import { DesktopNav } from "components/DesktopNav/DesktopNav";
@@ -14,9 +14,22 @@ export const Navbar = () => {
 
   const theme = useTheme();
   const alt = theme.palette.background.alt;
+  const border = theme.palette.divider;
 
   return (
-    <FlexBetween padding="1rem 6%" backgroundColor={alt}>
+    <FlexBetween
+      component="header"
+      padding="0.5rem 6%"
+      backgroundColor={alt}
+      sx={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        zIndex: "100",
+        borderBottom: `1px solid ${border}`,
+      }}
+    >
       <FlexBetween gap="1.75rem">
         <Logo />
         {isNonMobileScreens && <SearchNav />}
@@ -40,6 +53,5 @@ export const Navbar = () => {
     </FlexBetween>
   );
 };
-
 
 export default Navbar;

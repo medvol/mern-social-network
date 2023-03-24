@@ -18,7 +18,6 @@ export const MobileNav = ({ onClick }) => {
       minWidth="300px"
       backgroundColor={background}
     >
-      {/* CLOSE ICON */}
       <Box display="flex" justifyContent="flex-end" p="1rem">
         <IconButton onClick={onClick}>
           <Close />

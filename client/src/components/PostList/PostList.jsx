@@ -1,28 +1,34 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts, getUserPosts } from "state/posts/operations";
 import { Box } from "@mui/material";
 import Post from "components/Post/Post";
-import { selectPosts } from "state/posts/selectors";
+import Loader from "components/Loader/Loader";
+import { useAuth } from "hooks/useAuth";
+import { usePosts } from "hooks/usePosts";
 
-const PostList = ({ user, isProfilePage = false }) => {
-  const dispatch = useDispatch();
-  const posts = useSelector(selectPosts);
-
-  useEffect(() => {
-    if (isProfilePage) {
-      dispatch(getUserPosts(user._id));
-    } else {
-      dispatch(getAllPosts());
-    }
-  }, [dispatch, user._id, isProfilePage]);
+const PostList = () => {
+  const { posts, isLoading, error } = usePosts();
+  const { user } = useAuth();
 
   return (
-    <Box component="ul">
-      {posts.map((post) => (
-        <Post key={post._id} item={post} />
-      ))}
-    </Box>
+    <>
+      {isLoading && <Loader />}
+      {error && (
+        <Box sx={{ textAlign: "center" }}>
+          Something went wrong... Please, try later.
+        </Box>
+      )}
+      {!posts.length && !isLoading && (
+        <Box sx={{ textAlign: "center" }}>
+          Ooops... {user.firstName} {user.lastName} did not post anything
+        </Box>
+      )}
+      {!isLoading && posts && (
+        <Box component="ul">
+          {posts.map((post) => (
+            <Post key={post._id} item={post} />
+          ))}
+        </Box>
+      )}
+    </>
   );
 };
 

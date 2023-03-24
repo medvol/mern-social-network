@@ -7,15 +7,18 @@ import FriendsList from "components/FriendsList/FriendsList";
 import AddPostWidget from "components/AddPostWidget/AddPostWidget";
 import PostList from "components/PostList/PostList";
 import UserWidget from "components/UserWidget/UserWidget";
+import { useDispatch } from "react-redux";
+import { getUserPosts } from "state/posts/operations";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
   const { userId } = useParams();
+  const dispatch = useDispatch();
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   useEffect(() => {
     const getUser = async () => {
-      const {data} = await axios.get(
+      const { data } = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/users/${userId}`
       );
       setUser(data);
@@ -23,14 +26,19 @@ const ProfilePage = () => {
     getUser();
   }, [userId]);
 
-  if (!user) return null;
+  useEffect(() => {
+    dispatch(getUserPosts(userId));
+  }, [dispatch, userId]);
+
+  if (!user) return;
 
   return (
     <Box>
       <Navbar />
       <Box
+        component="main"
         width="100%"
-        padding="2rem 6%"
+        padding="6rem 6% 2rem"
         display={isNonMobileScreens ? "flex" : "block"}
         gap="2rem"
         justifyContent="center"
@@ -46,7 +54,7 @@ const ProfilePage = () => {
         >
           <AddPostWidget />
           <Box m="2rem 0" />
-          <PostList user={user} isProfilePage />
+          <PostList />
         </Box>
       </Box>
     </Box>
