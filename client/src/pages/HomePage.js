@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Box, AppBar, useMediaQuery, Toolbar } from "@mui/material";
+import { Box, useMediaQuery, Toolbar } from "@mui/material";
 import Navbar from "components/Navbar/Navbar";
 import UserWidget from "components/UserWidget/UserWidget";
 import AddPostWidget from "components/AddPostWidget/AddPostWidget";
@@ -22,27 +22,31 @@ export default function HomePage() {
 
   return (
     <>
-      <Box>
-        <Navbar />
-      </Box>
+      <Navbar />
+
       <Toolbar id="back-to-top-anchor" />
       <Box
         component="main"
         width="100%"
-        padding="6rem 6% 2rem"
+        padding="4rem 6% 2rem"
         display={isNonMobileScreens ? "flex" : "block"}
         gap="0.5rem"
         justifyContent="space-between"
+        alignItems="start"
+        position="relative"
+        overflow-y="auto"
       >
-        <AppBar
-          position="='sticky"
+        <Box
           sx={{
+            position: `${isNonMobileScreens ? "sticky" : "static"}`,
             flexBasis: `${isNonMobileScreens ? "26%" : undefined}`,
-            top: "8rem",
+            top: "6rem",
+            left: 0,
+            zIndex: 1,
           }}
         >
           <UserWidget user={user} />
-        </AppBar>
+        </Box>
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
@@ -51,13 +55,20 @@ export default function HomePage() {
           <PostList />
         </Box>
         {isNonMobileScreens && (
-          <Box flexBasis="26%">
+          <Box
+            position="sticky"
+            sx={{
+              flexBasis: `${isNonMobileScreens ? "26%" : undefined}`,
+              top: "6rem",
+              left: 0,
+              zIndex: 1,
+            }}
+          >
             <Advertisement />
-            <Box m="2rem 0" />
             <FriendsList user={user} />
           </Box>
         )}
-        <BackToTop/>
+        <BackToTop />
       </Box>
     </>
   );

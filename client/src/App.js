@@ -10,7 +10,8 @@ import { refreshUser } from "state/auth/operations";
 import Loader from "components/Loader/Loader";
 
 function App() {
-  const { mode, isRefreshing} = useAuth();
+  const { isRefreshing } = useAuth();
+  const mode = localStorage.getItem("mode") || 'light';
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const dispatch = useDispatch();
 

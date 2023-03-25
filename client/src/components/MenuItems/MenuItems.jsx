@@ -5,6 +5,7 @@ import {
   MenuItem,
   FormControl,
   useTheme,
+  IconButton,
 } from "@mui/material";
 import { Message, Notifications, Help } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
@@ -25,9 +26,16 @@ export const MenuItems = () => {
   return (
     <>
       <ModeButton />
-      <Message sx={{ fontSize: "25px" }} />
-      <Notifications sx={{ fontSize: "25px" }} />
-      <Help sx={{ fontSize: "25px" }} />
+      <IconButton>
+        <Message sx={{ fontSize: "25px" }} />
+      </IconButton>
+      <IconButton>
+        <Notifications sx={{ fontSize: "25px" }} />
+      </IconButton>
+      <IconButton>
+        <Help sx={{ fontSize: "25px" }} />
+      </IconButton>
+
       <FormControl variant="standard" value={fullName}>
         <Select
           value={fullName}

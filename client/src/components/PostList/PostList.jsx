@@ -17,7 +17,7 @@ const PostList = () => {
         </Box>
       )}
       {!posts.length && !isLoading && (
-        <Box sx={{ textAlign: "center" }}>
+        <Box sx={{ textAlign: "center", mt:"2rem" }}>
           Ooops... {user.firstName} {user.lastName} did not post anything
         </Box>
       )}

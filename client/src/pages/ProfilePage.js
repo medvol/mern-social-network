@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Toolbar, useMediaQuery } from "@mui/material";
 import Navbar from "components/Navbar/Navbar";
 import FriendsList from "components/FriendsList/FriendsList";
 import AddPostWidget from "components/AddPostWidget/AddPostWidget";
 import PostList from "components/PostList/PostList";
 import UserWidget from "components/UserWidget/UserWidget";
+import BackToTop from "components/BackToTop/BackToTop";
 import { useDispatch } from "react-redux";
 import { getUserPosts } from "state/posts/operations";
 
@@ -35,17 +36,20 @@ const ProfilePage = () => {
   return (
     <Box>
       <Navbar />
+      <Toolbar id="back-to-top-anchor" />
       <Box
         component="main"
         width="100%"
-        padding="6rem 6% 2rem"
+        padding="4rem 6% 2rem"
         display={isNonMobileScreens ? "flex" : "block"}
         gap="2rem"
         justifyContent="center"
+        alignItems="start"
+        position="relative"
+        overflow-y="auto"
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget user={user} />
-          <Box m="2rem 0" />
           <FriendsList user={user} />
         </Box>
         <Box
@@ -53,10 +57,10 @@ const ProfilePage = () => {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <AddPostWidget />
-          <Box m="2rem 0" />
           <PostList />
         </Box>
       </Box>
+      <BackToTop />
     </Box>
   );
 };

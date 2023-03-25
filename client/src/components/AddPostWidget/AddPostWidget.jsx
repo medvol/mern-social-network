@@ -35,7 +35,9 @@ const AddPostWidget = () => {
   const { user } = useAuth();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const mediumMain = palette.neutral.mediumMain;
-  const medium = palette.neutral.medium;
+  const medium = palette.neutral.light;
+  const dark = palette.neutral.dark;
+  const icon = palette.primary.main;
 
   const handlePost = async () => {
     const formData = new FormData();
@@ -51,7 +53,7 @@ const AddPostWidget = () => {
   };
 
   return (
-    <WidgetWrapper>
+    <WidgetWrapper sx={{ pb: "0.5rem" }}>
       <FlexBetween gap="1.5rem">
         <UserImage image={user.picturePath} />
         <InputBase
@@ -62,7 +64,7 @@ const AddPostWidget = () => {
             width: "100%",
             backgroundColor: palette.neutral.light,
             borderRadius: "2rem",
-            padding: "1rem 2rem",
+            padding: "0.5rem 2rem",
           }}
         />
       </FlexBetween>
@@ -100,7 +102,7 @@ const AddPostWidget = () => {
                 {image && (
                   <IconButton
                     onClick={() => setImage(null)}
-                    sx={{ width: "15%" }}
+                    sx={{ ml: "0.5rem" }}
                   >
                     <DeleteOutlined />
                   </IconButton>
@@ -111,34 +113,107 @@ const AddPostWidget = () => {
         </Box>
       )}
 
-      <Divider sx={{ margin: "1.25rem 0" }} />
+      <Divider sx={{ margin: "1rem 0" }} />
 
       <FlexBetween>
-        <FlexBetween gap="0.25rem" onClick={() => setIsImage(!isImage)}>
-          <ImageOutlined sx={{ color: mediumMain }} />
-          <Typography
-            color={mediumMain}
-            sx={{ "&:hover": { cursor: "pointer", color: medium } }}
-          >
+        <FlexBetween
+          component="button"
+          variant="outlined"
+          gap="0.25rem"
+          onClick={() => setIsImage(!isImage)}
+          sx={{
+            padding: "0.75rem",
+            border: "none",
+            backgroundColor: "transparent",
+            "&:hover": {
+              cursor: "pointer",
+              color: dark,
+              backgroundColor: medium,
+              borderRadius: 1,
+            },
+          }}
+        >
+          <ImageOutlined sx={{ color: icon }} />
+          <Typography color={mediumMain} sx={{ "&:hover": { color: dark } }}>
             Image
           </Typography>
         </FlexBetween>
 
         {isNonMobileScreens ? (
           <>
-            <FlexBetween gap="0.25rem">
-              <GifBoxOutlined sx={{ color: mediumMain }} />
-              <Typography color={mediumMain}>Clip</Typography>
+            <FlexBetween
+              gap="0.25rem"
+              component="button"
+              variant="outlined"
+              sx={{
+                padding: "0.75rem",
+                border: "none",
+                backgroundColor: "transparent",
+                "&:hover": {
+                  cursor: "pointer",
+                  color: dark,
+                  backgroundColor: medium,
+                  borderRadius: 1,
+                },
+              }}
+            >
+              <GifBoxOutlined sx={{ color: "#5f9b41" }} />
+              <Typography
+                color={mediumMain}
+                sx={{ "&:hover": { color: dark } }}
+              >
+                Clip
+              </Typography>
             </FlexBetween>
 
-            <FlexBetween gap="0.25rem">
-              <AttachFileOutlined sx={{ color: mediumMain }} />
-              <Typography color={mediumMain}>Attachment</Typography>
+            <FlexBetween
+              gap="0.25rem"
+              component="button"
+              variant="outlined"
+              sx={{
+                padding: "0.75rem",
+                border: "none",
+                backgroundColor: "transparent",
+                "&:hover": {
+                  cursor: "pointer",
+                  color: dark,
+                  backgroundColor: medium,
+                  borderRadius: 1,
+                },
+              }}
+            >
+              <AttachFileOutlined sx={{ color: "#c37d16" }} />
+              <Typography
+                color={mediumMain}
+                sx={{ "&:hover": { color: dark } }}
+              >
+                Attachment
+              </Typography>
             </FlexBetween>
 
-            <FlexBetween gap="0.25rem">
-              <MicOutlined sx={{ color: mediumMain }} />
-              <Typography color={mediumMain}>Audio</Typography>
+            <FlexBetween
+              gap="0.25rem"
+              component="button"
+              variant="outlined"
+              sx={{
+                padding: "0.75rem",
+                border: "none",
+                backgroundColor: "transparent",
+                "&:hover": {
+                  cursor: "pointer",
+                  color: dark,
+                  backgroundColor: medium,
+                  borderRadius: 1,
+                },
+              }}
+            >
+              <MicOutlined sx={{ color: "#f5987e" }} />
+              <Typography
+                color={mediumMain}
+                sx={{ "&:hover": { color: dark } }}
+              >
+                Audio
+              </Typography>
             </FlexBetween>
           </>
         ) : (
@@ -148,11 +223,12 @@ const AddPostWidget = () => {
         )}
 
         <Button
+          variant='contained'
           disabled={!post}
           onClick={handlePost}
           sx={{
-            color: palette.background.alt,
-            backgroundColor: palette.primary.main,
+            color: mediumMain,
+            backgroundColor: palette.primary.light,
             borderRadius: "3rem",
           }}
         >
