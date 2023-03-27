@@ -11,7 +11,7 @@ import Loader from "components/Loader/Loader";
 
 function App() {
   const { isRefreshing } = useAuth();
-  const mode = localStorage.getItem("mode") || 'light';
+  const mode = localStorage.getItem("mode") || "light";
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ function App() {
   return isRefreshing ? (
     <Loader />
   ) : (
-    <div className="app">
+    <div>
       <BrowserRouter>
         <Suspense fallback={null}>
           <ThemeProvider theme={theme}>

@@ -34,7 +34,7 @@ const AddPostWidget = () => {
   const { palette } = useTheme();
   const { user } = useAuth();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
-  const mediumMain = palette.neutral.mediumMain;
+  const mediumMain = palette.neutral.main;
   const medium = palette.neutral.light;
   const dark = palette.neutral.dark;
   const icon = palette.primary.main;
@@ -118,7 +118,7 @@ const AddPostWidget = () => {
       <FlexBetween>
         <FlexBetween
           component="button"
-          variant="outlined"
+          variant="text"
           gap="0.25rem"
           onClick={() => setIsImage(!isImage)}
           sx={{
@@ -144,7 +144,7 @@ const AddPostWidget = () => {
             <FlexBetween
               gap="0.25rem"
               component="button"
-              variant="outlined"
+              variant="text"
               sx={{
                 padding: "0.75rem",
                 border: "none",
@@ -169,7 +169,7 @@ const AddPostWidget = () => {
             <FlexBetween
               gap="0.25rem"
               component="button"
-              variant="outlined"
+              variant="text"
               sx={{
                 padding: "0.75rem",
                 border: "none",
@@ -194,7 +194,7 @@ const AddPostWidget = () => {
             <FlexBetween
               gap="0.25rem"
               component="button"
-              variant="outlined"
+              variant="text"
               sx={{
                 padding: "0.75rem",
                 border: "none",
@@ -223,13 +223,17 @@ const AddPostWidget = () => {
         )}
 
         <Button
-          variant='contained'
+          variant="contained"
           disabled={!post}
           onClick={handlePost}
           sx={{
-            color: mediumMain,
-            backgroundColor: palette.primary.light,
+            backgroundColor: palette.primary.main,
+            color: palette.background.alt,
             borderRadius: "3rem",
+            "&:hover": {
+              backgroundColor: palette.primary.light,
+              color: palette.primary.main,
+            },
           }}
         >
           POST

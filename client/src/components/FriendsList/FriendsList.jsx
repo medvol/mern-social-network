@@ -6,7 +6,10 @@ const FriendsList = ({ user }) => {
   const { palette } = useTheme();
 
   return (
-    <WidgetWrapper sx={{mt:"2rem"}}>
+    <WidgetWrapper sx={{height:"30vh",mt:"2rem", overflow: "hidden",
+      overflowY: "scroll"
+    }}>
+      
       <Typography
         color={palette.neutral.dark}
         variant="h5"

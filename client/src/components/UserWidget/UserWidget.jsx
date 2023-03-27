@@ -5,7 +5,7 @@ import {
   LocationOnOutlined,
   WorkOutlineOutlined,
 } from "@mui/icons-material";
-import { Box, Typography, Divider, useTheme } from "@mui/material";
+import { Box, Typography, Divider, useTheme, IconButton } from "@mui/material";
 import UserImage from "components/UserImage/UserImage";
 import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
 import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
@@ -59,7 +59,9 @@ const UserWidget = ({ user }) => {
             <Typography color={medium}>{friends.length} friends</Typography>
           </Box>
         </FlexBetween>
-        <ManageAccountsOutlined />
+        <IconButton>
+          <ManageAccountsOutlined />
+        </IconButton>
       </FlexBetween>
 
       <Divider />
@@ -109,7 +111,9 @@ const UserWidget = ({ user }) => {
               <Typography color={medium}>Social Network</Typography>
             </Box>
           </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+          <IconButton>
+            <EditOutlined sx={{ color: main }} />
+          </IconButton>
         </FlexBetween>
 
         <FlexBetween gap="1rem">
@@ -122,7 +126,10 @@ const UserWidget = ({ user }) => {
               <Typography color={medium}>Network Platform</Typography>
             </Box>
           </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+          <IconButton>
+            <EditOutlined sx={{ color: main }} />
+            
+          </IconButton>
         </FlexBetween>
       </Box>
     </WidgetWrapper>

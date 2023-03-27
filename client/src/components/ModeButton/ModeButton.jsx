@@ -7,11 +7,11 @@ import { useAuth } from "hooks/useAuth";
 
 export const ModeButton = () => {
   const { mode } = useAuth();
-
   const dispatch = useDispatch();
   const theme = useTheme();
 
   const dark = theme.palette.neutral.dark;
+  
   const handleMode = () => {
     if (mode === "light") {
       localStorage.setItem("mode", "dark");

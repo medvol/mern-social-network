@@ -1,7 +1,7 @@
-import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
-import { Box, IconButton, Typography, useTheme, Tooltip } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
+import { IconButton, Typography, useTheme, Tooltip } from "@mui/material";
 import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
 import UserImage from "components/UserImage/UserImage";
 import { useAuth } from "hooks/useAuth";
@@ -9,7 +9,6 @@ import { addFriend, deleteFriend } from "state/auth/operations";
 
 const PostTitle = ({ owner }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { user } = useAuth();
   const { _id, firstName, lastName, picturePath, location } = owner;
 
@@ -25,12 +24,7 @@ const PostTitle = ({ owner }) => {
     <FlexBetween>
       <FlexBetween gap="1rem">
         <UserImage image={picturePath} size="55px" />
-        <Box
-          onClick={() => {
-            navigate(`/profile/${_id}`);
-            // navigate(0);
-          }}
-        >
+        <Link to={`/profile/${_id}`}>
           <Typography
             color={main}
             variant="h5"
@@ -47,7 +41,7 @@ const PostTitle = ({ owner }) => {
           <Typography color={medium} fontSize="0.75rem">
             {location}
           </Typography>
-        </Box>
+        </Link>
       </FlexBetween>
       {isFriend && user._id !== owner._id && (
         <Tooltip title="Remove Friend" placement="top-end">
