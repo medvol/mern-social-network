@@ -8,6 +8,7 @@ import PostList from "components/PostList/PostList";
 import Advertisement from "components/Advertisement/Advertisement";
 import FriendsList from "components/FriendsList/FriendsList";
 import BackToTop from "components/BackToTop/BackToTop";
+import RecommendedUsers from "components/RecommendedUsers/RecommendedUsers";
 import { useAuth } from "hooks/useAuth";
 import { getAllPosts } from "state/posts/operations";
 
@@ -65,7 +66,8 @@ export default function HomePage() {
             }}
           >
             <Advertisement />
-            <FriendsList user={user} />
+            <RecommendedUsers/>
+            {/* <FriendsList user={user} /> */}
           </Box>
         )}
         <BackToTop />

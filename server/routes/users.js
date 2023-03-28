@@ -12,6 +12,8 @@ const router = express.Router();
 
 router.get("/current", verifyToken, ctrlWrapper(getCurrent));
 
+router.get("/recommended", verifyToken, ctrlWrapper(recommendedUsers));
+
 router.get("/:id", isValidId, verifyToken, ctrlWrapper(getUser));
 
 router.patch("/:id/:friendId", isValidId, verifyToken, ctrlWrapper(addFriend));
@@ -23,6 +25,6 @@ router.delete(
   ctrlWrapper(deleteFriend)
 );
 
-router.get("/recomended", isValidId, verifyToken, ctrlWrapper(recommendedUsers))
+
 
 export default router;

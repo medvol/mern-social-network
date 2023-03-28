@@ -3,15 +3,12 @@ import { DarkMode, LightMode } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { setMode } from "state/auth/authSlice";
 
-
 export const ModeButton = () => {
-  
   const dispatch = useDispatch();
   const theme = useTheme();
   const mode = localStorage.getItem("mode");
 
   const dark = theme.palette.neutral.dark;
-  console.log(mode);
 
   const handleMode = () => {
     if (mode === "light") {
