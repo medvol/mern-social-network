@@ -2,16 +2,17 @@ import { IconButton, useTheme } from "@mui/material";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { setMode } from "state/auth/authSlice";
-import { useAuth } from "hooks/useAuth";
 
 
 export const ModeButton = () => {
-  const { mode } = useAuth();
+  
   const dispatch = useDispatch();
   const theme = useTheme();
+  const mode = localStorage.getItem("mode");
 
   const dark = theme.palette.neutral.dark;
-  
+  console.log(mode);
+
   const handleMode = () => {
     if (mode === "light") {
       localStorage.setItem("mode", "dark");

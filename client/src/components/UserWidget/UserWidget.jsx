@@ -128,7 +128,6 @@ const UserWidget = ({ user }) => {
           </FlexBetween>
           <IconButton>
             <EditOutlined sx={{ color: main }} />
-            
           </IconButton>
         </FlexBetween>
       </Box>
