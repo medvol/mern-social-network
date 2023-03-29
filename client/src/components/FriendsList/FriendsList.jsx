@@ -1,4 +1,4 @@
-import { Box, Divider, List, ListItem, Typography, useTheme } from "@mui/material";
+import { Divider, List, ListItem, Typography, useTheme } from "@mui/material";
 import PostTitle from "components/PostTitle/PostTitle";
 import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
 
@@ -19,7 +19,7 @@ const FriendsList = ({ user }) => {
 
       <List display="flex" flexDirection="column" gap="1.5rem">
         {user.friends.map((friend) => (
-          <ListItem key={friend._id}>
+          <ListItem sx={{px:0}} key={friend._id}>
             <PostTitle owner={friend} />
           </ListItem>
         ))}

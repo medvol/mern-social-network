@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Divider, Typography, useTheme } from "@mui/material";
+import { Divider, List, ListItem, Typography, useTheme } from "@mui/material";
 import PostTitle from "components/PostTitle/PostTitle";
 import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
 
@@ -43,13 +43,13 @@ const RecommendedUsers = () => {
       </Typography>
       <Divider sx={{ mb: "0.75rem" }} />
       {users && (
-        <Box display="flex" flexDirection="column" gap="1.5rem" component="ul">
+        <List display="flex" sx={{ flexDirection: "column", gap: "1.5rem" }}>
           {users.map((user) => (
-            <li key={user._id}>
+            <ListItem sx={{ px: 0 }} key={user._id}>
               <PostTitle owner={user} />
-            </li>
+            </ListItem>
           ))}
-        </Box>
+        </List>
       )}
       {error && (
         <Typography

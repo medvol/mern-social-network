@@ -6,7 +6,6 @@ import UserWidget from "components/UserWidget/UserWidget";
 import AddPostWidget from "components/AddPostWidget/AddPostWidget";
 import PostList from "components/PostList/PostList";
 import Advertisement from "components/Advertisement/Advertisement";
-import FriendsList from "components/FriendsList/FriendsList";
 import BackToTop from "components/BackToTop/BackToTop";
 import RecommendedUsers from "components/RecommendedUsers/RecommendedUsers";
 import { useAuth } from "hooks/useAuth";
@@ -66,8 +65,7 @@ export default function HomePage() {
             }}
           >
             <Advertisement />
-            <RecommendedUsers/>
-            {/* <FriendsList user={user} /> */}
+            <RecommendedUsers />
           </Box>
         )}
         <BackToTop />

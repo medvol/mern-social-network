@@ -23,11 +23,11 @@ const PostTitle = ({ owner }) => {
   return (
     <FlexBetween>
       <FlexBetween gap="1rem">
-        <UserImage image={picturePath} size="55px" />
+        <UserImage image={picturePath} size="50px" />
         <Link to={`/profile/${_id}`}>
           <Typography
             color={main}
-            variant="h5"
+            variant="h6"
             fontWeight="500"
             sx={{
               "&:hover": {

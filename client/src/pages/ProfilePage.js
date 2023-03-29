@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Box, Toolbar, useMediaQuery } from "@mui/material";
+import { Box, Toolbar, Typography, useMediaQuery } from "@mui/material";
 import Navbar from "components/Navbar/Navbar";
 import FriendsList from "components/FriendsList/FriendsList";
 import AddPostWidget from "components/AddPostWidget/AddPostWidget";
@@ -10,11 +10,13 @@ import UserWidget from "components/UserWidget/UserWidget";
 import BackToTop from "components/BackToTop/BackToTop";
 import { useDispatch } from "react-redux";
 import { getUserPosts } from "state/posts/operations";
+import { usePosts } from "hooks/usePosts";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
   const { userId } = useParams();
   const dispatch = useDispatch();
+  const { posts, isLoading} = usePosts();
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   useEffect(() => {
@@ -58,6 +60,15 @@ const ProfilePage = () => {
         >
           <AddPostWidget />
           <PostList />
+          {!posts.length && !isLoading && (
+            <Typography
+              variant="h6"
+              fontWeight="400"
+              sx={{ textAlign: "center", mt: "2rem" }}
+            >
+              Ooops... {user.firstName} {user.lastName} did not post anything
+            </Typography>
+          )}
         </Box>
       </Box>
       <BackToTop />
