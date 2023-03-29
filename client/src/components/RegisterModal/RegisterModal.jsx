@@ -7,25 +7,30 @@ const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
-  transform: "translate(-50%, -50%)",
   width: 400,
   height: 300,
+  display: 'flex',
+  flexDirection:'column',
+  alignItems: "center",
+  justifyContent:"center",
+  p: 4, 
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "1px solid #000",
   boxShadow: 24,
-  p: 4,
+  borderRadius:"1rem",
+  transform: "translate(-50%, -50%)",
 };
 
-export function RegisterModal() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export function RegisterModal({open, handleClose}) {
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
   const {user} = useAuth();
   const { palette } = useTheme();
   
   return (
     <div>
-      <Button
+      {/* <Button
         fullWidth
         type="submit"
         onClick={handleOpen}
@@ -38,7 +43,7 @@ export function RegisterModal() {
         }}
       >
         "REGISTER"
-      </Button>
+      </Button> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -48,19 +53,42 @@ export function RegisterModal() {
         <Box sx={style}>
           {user ? (
             <>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                sx={{ mb: "2rem" }}
+              >
                 Register is successful!!
               </Typography>
-              <Button as={Link} to="/" onClick={handleClose}>
+              <Button
+                variant="contained"
+                size="medium"
+                component="a"
+                as={Link}
+                to="/"
+                onClick={handleClose}
+              >
                 Go to LogIn
               </Button>
             </>
           ) : (
             <>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                sx={{ mb: "2rem" }}
+              >
                 Something went wrong. Try one more time!
               </Typography>
-              <Button as={Link} to="/register" onClick={handleClose}>
+              <Button
+                variant="contained"
+                size="medium"
+                as={Link}
+                to="/register"
+                onClick={handleClose}
+              >
                 Try again
               </Button>
             </>

@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
   Box,
   TextField,
   useMediaQuery,
   Typography,
   useTheme,
+  Button,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import Dropzone from "react-dropzone";
 import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
 import { register } from "state/auth/operations";
@@ -28,25 +29,30 @@ const initialValuesRegister = {
 
 export const RegisterForm = () => {
   const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { palette } = useTheme();
+  const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
-  const { palette } = useTheme();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const handleFormSubmit = async (values, onSubmitProps) => {
+  const handleFormSubmit = async (values) => {
     const formData = new FormData();
-    for (let value in values) {
-      formData.append(value, values[value]);
+    for (let [key, value] of Object.entries(values)) {
+      formData.append(key, value);
     }
     formData.append("picturePath", values.picture.name);
-
-    dispatch(register(formData));
-    toggleModal();
-    onSubmitProps.resetForm();
+    console.log(formData);
+    try {
+       const response = await dispatch(register(formData));
+       // toggleModal();
+       if (response) setShowModal(!showModal);
+    } catch (error) {
+      console.log(error)
+    }
+   
   };
 
   return (
@@ -139,7 +145,7 @@ export const RegisterForm = () => {
                     >
                       <input {...getInputProps()} />
                       {!values.picture ? (
-                        <p>Add Picture Here</p>
+                        <p>Add Picture Here (is required)</p>
                       ) : (
                         <FlexBetween>
                           <Typography>{values.picture.name}</Typography>
@@ -174,8 +180,7 @@ export const RegisterForm = () => {
             </Box>
 
             <Box>
-              <RegisterModal />
-              {/* <Button
+              <Button
                 fullWidth
                 type="submit"
                 sx={{
@@ -186,8 +191,8 @@ export const RegisterForm = () => {
                   "&:hover": { color: palette.primary.main },
                 }}
               >
-                "REGISTER"
-              </Button> */}
+                REGISTER
+              </Button>
               <Typography
                 onClick={() => {
                   navigate("/");
@@ -208,9 +213,10 @@ export const RegisterForm = () => {
           </form>
         )}
       </Formik>
-      {/* {showModal && (
+
+      {showModal && (
         <RegisterModal open={showModal} handleClose={toggleModal} />
-      )} */}
+      )}
     </>
   );
 };
