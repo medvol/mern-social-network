@@ -2,26 +2,25 @@ import { useCookies } from "react-cookie";
 import { IconButton, useTheme } from "@mui/material";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
-import { setMode } from "state/auth/authSlice";
 
 export const ModeButton = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
   // const mode = localStorage.getItem("mode");
 
-   const [cookies, setCookie] = useCookies(["mode"]);
+  const [cookies, setCookie] = useCookies(["mode"]);
 
   const dark = theme.palette.neutral.dark;
-
+  console.log(cookies.mode);
 
   const handleMode = () => {
     if (cookies.mode === "light") {
       setCookie("mode", "dark", { path: "/" });
-      dispatch(setMode());
+      // dispatch(setMode());
     }
     if (cookies.mode === "dark") {
       setCookie("mode", "light", { path: "/" });
-      dispatch(setMode());
+      // dispatch(setMode());
     }
   };
 

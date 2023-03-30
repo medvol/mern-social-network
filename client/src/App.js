@@ -1,7 +1,7 @@
 import { useEffect, useMemo, Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
-  import { useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
@@ -12,12 +12,18 @@ import Loader from "components/Loader/Loader";
 
 function App() {
   const { isRefreshing } = useAuth();
-  const [cookies, setCookie, removeCookie] = useCookies(["mode"]);
-  const mode = cookies.mode;
-
-  // const mode = localStorage.getItem("mode") || "light";
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const [cookies, setCookie] = useCookies(["mode"]);
   const dispatch = useDispatch();
+  
+  const mode = cookies.mode || "light";
+
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+
+  useEffect(() => {
+    if (!mode) {
+      setCookie("mode", mode, { path: "/" });
+    }
+  }, [mode, setCookie]);
 
   useEffect(() => {
     dispatch(refreshUser());

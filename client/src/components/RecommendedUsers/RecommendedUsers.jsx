@@ -45,7 +45,7 @@ const RecommendedUsers = () => {
       {users && (
         <List display="flex" sx={{ flexDirection: "column", gap: "1.5rem" }}>
           {users.map((user) => (
-            <ListItem sx={{ px: 0 }} key={user._id}>
+            <ListItem sx={{ px: "0.5rem" }} key={user._id}>
               <PostTitle owner={user} />
             </ListItem>
           ))}
