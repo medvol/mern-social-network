@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
+import Joi from "joi";
+import { handleMongooseError } from "../helpers/index.js";
 
 const emailRegexp = /^(?=.{10,63}$)([A-Za-z0-9._-]{2,}@[A-Za-z0-9._-]{2,})$/;
 
-const UserSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
@@ -53,5 +55,21 @@ const UserSchema = new mongoose.Schema(
   { versionKey: false, timestamps: true }
 );
 
-const User = mongoose.model("User", UserSchema);
+userSchema.post("save", handleMongooseError);
+
+export const registerSchema = Joi.object({
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  email: Joi.string().pattern(emailRegexp).required(),
+  password: Joi.string().min(6).required(),
+  location: Joi.string(),
+  occupation: Joi.string(),
+});
+
+export const loginSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+  password: Joi.string().min(3).max(30).required(),
+});
+
+const User = mongoose.model("User", userSchema);
 export default User;
