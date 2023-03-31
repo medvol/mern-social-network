@@ -3,14 +3,23 @@ import {
   getAllPosts,
   getUserPosts,
   likePost,
+  createPost,
 } from "../controllers/posts/index.js";
-import { verifyToken, isValidId, ctrlWrapper } from "../middlewares/index.js";
+import { verifyToken, isValidId, ctrlWrapper, upload } from "../middlewares/index.js";
 
 const router = express.Router();
 
 router.get("/", verifyToken, ctrlWrapper(getAllPosts));
-router.get("/:id/posts", isValidId, verifyToken, ctrlWrapper(getUserPosts));
 
-router.patch("/:id/like", isValidId, verifyToken, ctrlWrapper(likePost));
+router.post(
+  "/",
+  verifyToken,
+  upload.single("picture"),
+  ctrlWrapper(createPost)
+);
+
+router.get("/:id/posts", verifyToken, isValidId, ctrlWrapper(getUserPosts));
+
+router.patch("/:id/like", verifyToken, isValidId, ctrlWrapper(likePost));
 
 export default router;
