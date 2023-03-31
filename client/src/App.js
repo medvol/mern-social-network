@@ -20,10 +20,10 @@ function App() {
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   useEffect(() => {
-    if (!mode) {
+    if (!cookies.mode) {
       setCookie("mode", mode, { path: "/" });
     }
-  }, [mode, setCookie]);
+  }, [cookies.mode, mode, setCookie]);
 
   useEffect(() => {
     dispatch(refreshUser());

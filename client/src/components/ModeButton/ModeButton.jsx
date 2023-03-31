@@ -4,14 +4,13 @@ import { DarkMode, LightMode } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 
 export const ModeButton = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const theme = useTheme();
   // const mode = localStorage.getItem("mode");
 
   const [cookies, setCookie] = useCookies(["mode"]);
 
   const dark = theme.palette.neutral.dark;
-  console.log(cookies.mode);
 
   const handleMode = () => {
     if (cookies.mode === "light") {
