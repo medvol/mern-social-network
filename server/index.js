@@ -26,12 +26,7 @@ app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 app.post("/auth/register", upload.single("picture"), ctrlWrapper(register));
-// app.post(
-//   "/posts",
-//   verifyToken,
-//   upload.single("picture"),
-//   ctrlWrapper(createPost)
-// );
+
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);

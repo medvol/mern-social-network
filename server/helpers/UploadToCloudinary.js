@@ -9,8 +9,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-console.log(process.env.CLOUD_NAME);
-
 export const uploadToCloudinary = async (file, folderName) => {
   const { path: imagePath } = file;
 

@@ -37,12 +37,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    friends: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    friends: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
+      default: [],
+    },
     location: String,
     occupation: String,
     viewedProfile: Number,

@@ -5,9 +5,7 @@ export const createPost = async (req, res) => {
   const { _id: owner } = req.user;
   const file = req.file;
 
-
-  const picturePath = await uploadToCloudinary(file, 'posts')
-   console.log(picturePath);
+  const picturePath = await uploadToCloudinary(file, "posts");
 
   const newPost = new Post({
     owner,

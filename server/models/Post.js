@@ -32,26 +32,26 @@ const postSchema = mongoose.Schema(
       default: [],
     },
 
-    // comments: {
-    //   type: [
-    //     {
-    //       author: {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: "User",
-    //         required: true,
-    //       },
-    //       content: {
-    //         type: String,
-    //         required: true,
-    //       },
-    //       created_at: {
-    //         type: Date,
-    //         default: Date.now,
-    //       },
-    //     },
-    //   ],
-    //   default: [],
-    // },
+    comments: {
+      type: [
+        {
+          author: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+          },
+          content: {
+            type: String,
+            required: true,
+          },
+          created_at: {
+            type: Date,
+            default: Date.now,
+          },
+        },
+      ],
+      default: [],
+    },
   },
 
   { versionKey: false, timestamps: true }
