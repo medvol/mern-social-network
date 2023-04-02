@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Divider, List, ListItem, Typography, useTheme } from "@mui/material";
+import { List, ListItem, Typography, useTheme } from "@mui/material";
 import PostTitle from "components/PostTitle/PostTitle";
 import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
 
@@ -29,6 +29,7 @@ const RecommendedUsers = () => {
       sx={{
         height: "30vh",
         mt: "2rem",
+        pt: 0,
         overflow: "hidden",
         overflowY: "scroll",
       }}
@@ -37,15 +38,23 @@ const RecommendedUsers = () => {
         color={palette.neutral.dark}
         variant="h5"
         fontWeight="500"
-        sx={{ pb: "0.5rem" }}
+        sx={{
+          position: "sticky",
+          top: 0,
+          pt: "1rem",
+          pb: "0.5rem",
+          backgroundColor: palette.background.alt,
+          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+          zIndex: 1,
+        }}
       >
         Recommended for you
       </Typography>
-      <Divider sx={{ mb: "0.75rem" }} />
+
       {users && (
-        <List display="flex" sx={{ flexDirection: "column", gap: "1.5rem" }}>
+        <List sx={{ gap: "1.5rem" }}>
           {users.map((user) => (
-            <ListItem sx={{ px: "0.5rem" }} key={user._id}>
+            <ListItem key={user._id} sx={{ display: "block", px: "0.5rem" }}>
               <PostTitle owner={user} />
             </ListItem>
           ))}

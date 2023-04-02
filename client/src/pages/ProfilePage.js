@@ -42,7 +42,7 @@ const ProfilePage = () => {
       <Box
         component="main"
         width="100%"
-        padding="4rem 6% 2rem"
+        padding="2rem 6% 2rem"
         display={isNonMobileScreens ? "flex" : "block"}
         gap="2rem"
         justifyContent="center"

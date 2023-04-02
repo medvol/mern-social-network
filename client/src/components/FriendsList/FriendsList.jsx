@@ -1,25 +1,52 @@
-import { Divider, List, ListItem, Typography, useTheme } from "@mui/material";
+import { useState } from "react";
+import { Button, List, ListItem, Typography, useTheme } from "@mui/material";
 import PostTitle from "components/PostTitle/PostTitle";
 import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
+import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
 
 const FriendsList = ({ user }) => {
+  const [displayedFriends, setDisplayedFriends] = useState(
+    user?.friends?.slice(0, 5)
+  );
   const { palette } = useTheme();
+
+  const handleSeeAllClick = () => {
+    setDisplayedFriends(user.friends);
+  };
 
   return (
     <WidgetWrapper sx={{ mt: "2rem", overflow: "hidden", overflowY: "scroll" }}>
-      <Typography
-        color={palette.neutral.dark}
-        variant="h5"
-        fontWeight="500"
-        sx={{ pb: "0.5rem" }}
+      <FlexBetween
+        sx={{
+          pb: "0.5rem",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+        }}
       >
-        Friend List
-      </Typography>
-      <Divider sx={{ mb: "0.75rem" }} />
+        <Typography color={palette.neutral.dark} variant="h5" fontWeight="500">
+          Friend List
+        </Typography>
+        {displayedFriends.length < user.friends.length && (
+          <Button
+            variant="text"
+            size="small"
+            color="inherit"
+            onClick={handleSeeAllClick}
+            sx={{
+              fontWeight: 400,
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "transparent",
+              },
+            }}
+          >
+            See All
+          </Button>
+        )}
+      </FlexBetween>
 
-      <List display="flex"  gap="1.5rem">
-        {user.friends.map((friend) => (
-          <ListItem sx={{px:"0.5rem"}} key={friend._id}>
+      <List gap="1.5rem">
+        {displayedFriends.map((friend) => (
+          <ListItem key={friend._id} sx={{display:'block', px: "0.5rem" }}>
             <PostTitle owner={friend} />
           </ListItem>
         ))}
