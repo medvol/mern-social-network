@@ -23,7 +23,7 @@ const PostTitle = ({ owner }) => {
   return (
     <FlexBetween>
       <FlexBetween gap="1rem">
-        <UserImage image={picturePath} size="50px" />
+        <UserImage picturePath={picturePath} size="50px" />
         <Link to={`/profile/${_id}`}>
           <Typography
             color={main}

@@ -17,9 +17,9 @@ const FriendsList = ({ user }) => {
       </Typography>
       <Divider sx={{ mb: "0.75rem" }} />
 
-      <List display="flex" flexDirection="column" gap="1.5rem">
+      <List display="flex"  gap="1.5rem">
         {user.friends.map((friend) => (
-          <ListItem sx={{px:0}} key={friend._id}>
+          <ListItem sx={{px:"0.5rem"}} key={friend._id}>
             <PostTitle owner={friend} />
           </ListItem>
         ))}

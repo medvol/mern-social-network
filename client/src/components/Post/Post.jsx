@@ -37,18 +37,24 @@ const Post = ({ item }) => {
           height="auto"
           alt="post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`${process.env.REACT_APP_BASE_URL}/assets/${picturePath}`}
+          src={picturePath}
         />
       )}
       <FlexBetween mt="0.25rem">
         <FlexBetween gap="1rem">
           <FlexBetween gap="0.3rem">
             {isLiked ? (
-              <IconButton onClick={() => dispatch(likePost(_id))}>
+              <IconButton
+                disabled={user._id === owner._id}
+                onClick={() => dispatch(likePost(_id))}
+              >
                 <FavoriteOutlined sx={{ color: primary }} />
               </IconButton>
             ) : (
-              <IconButton onClick={() => dispatch(likePost(_id))}>
+              <IconButton
+                disabled={user._id === owner._id}
+                onClick={() => dispatch(likePost(_id))}
+              >
                 <FavoriteBorderOutlined />
               </IconButton>
             )}
@@ -74,7 +80,7 @@ const Post = ({ item }) => {
             <Box key={`${owner.firstName}-${i}`} component="li">
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
-                {comment}
+                {comment.content}
               </Typography>
             </Box>
           ))}

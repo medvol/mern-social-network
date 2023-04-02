@@ -44,15 +44,14 @@ export const RegisterForm = () => {
       formData.append(key, value);
     }
     formData.append("picturePath", values.picture.name);
-    console.log(formData);
+
     try {
-       const response = await dispatch(register(formData));
-       // toggleModal();
-       if (response) setShowModal(!showModal);
+      const response = await dispatch(register(formData));
+      // toggleModal();
+      if (response) setShowModal(!showModal);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-   
   };
 
   return (

@@ -11,10 +11,10 @@ import { refreshUser } from "state/auth/operations";
 import Loader from "components/Loader/Loader";
 
 function App() {
-  const { isRefreshing } = useAuth();
+  const { isRefreshing} = useAuth();
   const [cookies, setCookie] = useCookies(["mode"]);
   const dispatch = useDispatch();
-  
+
   const mode = cookies.mode || "light";
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     dispatch(refreshUser());
-  }, [dispatch]);
+  }, [dispatch ]);
 
   return isRefreshing ? (
     <Loader />

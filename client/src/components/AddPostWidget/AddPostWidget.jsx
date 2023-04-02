@@ -49,19 +49,21 @@ const AddPostWidget = () => {
     }
     dispatch(addPost(formData));
     setImage(null);
+    setIsImage(false);
     setPost("");
   };
 
   return (
     <WidgetWrapper sx={{ pb: "0.5rem" }}>
       <FlexBetween gap="1.5rem">
-        <UserImage image={user.picturePath} />
+        <UserImage picturePath={user.picturePath} />
         <InputBase
           placeholder="What's on your mind..."
           onChange={(e) => setPost(e.target.value)}
           value={post}
           sx={{
             width: "100%",
+            height:"auto",
             backgroundColor: palette.neutral.light,
             borderRadius: "2rem",
             padding: "0.5rem 2rem",
