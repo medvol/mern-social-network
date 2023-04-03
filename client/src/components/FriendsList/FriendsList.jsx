@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, List, ListItem, Typography, useTheme } from "@mui/material";
 import PostTitle from "components/PostTitle/PostTitle";
 import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
@@ -9,6 +9,10 @@ const FriendsList = ({ user }) => {
     user?.friends?.slice(0, 5)
   );
   const { palette } = useTheme();
+
+  useEffect(() => {
+    setDisplayedFriends(user?.friends?.slice(0, 5));
+  }, [user]);
 
   const handleSeeAllClick = () => {
     setDisplayedFriends(user.friends);
@@ -46,7 +50,7 @@ const FriendsList = ({ user }) => {
 
       <List gap="1.5rem">
         {displayedFriends.map((friend) => (
-          <ListItem key={friend._id} sx={{display:'block', px: "0.5rem" }}>
+          <ListItem key={friend._id} sx={{ display: "block", px: "0.5rem" }}>
             <PostTitle owner={friend} />
           </ListItem>
         ))}
