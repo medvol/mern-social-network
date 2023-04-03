@@ -4,6 +4,7 @@ import {
   getUserPosts,
   likePost,
   createPost,
+  commentPost,
 } from "../controllers/posts/index.js";
 import { verifyToken, isValidId, ctrlWrapper, upload } from "../middlewares/index.js";
 
@@ -21,5 +22,7 @@ router.post(
 router.get("/:id/posts", verifyToken, isValidId, ctrlWrapper(getUserPosts));
 
 router.patch("/:id/like", verifyToken, isValidId, ctrlWrapper(likePost));
+
+router.patch("/:id/comment", verifyToken, isValidId, ctrlWrapper(commentPost));
 
 export default router;
