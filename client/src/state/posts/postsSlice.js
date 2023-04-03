@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPosts, getUserPosts, addPost, likePost } from "./operations";
+import { getAllPosts, getUserPosts, addPost, likePost, addCommentPost } from "./operations";
 
 const initialState = {
   items: [],
@@ -24,11 +24,13 @@ export const postsSlice = createSlice({
     [getUserPosts.pending]: handlePending,
     [addPost.pending]: handlePending,
     [likePost.pending]: handlePending,
+    [addCommentPost.pending]: handlePending,
 
     [getAllPosts.rejected]: handleRejected,
     [getUserPosts.pending]: handleRejected,
     [addPost.pending]: handleRejected,
     [likePost.pending]: handleRejected,
+    [addCommentPost.pending]: handleRejected,
 
     [getAllPosts.fulfilled](state, action) {
       state.isLoading = false;
@@ -53,6 +55,15 @@ export const postsSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       state.items = updatedPosts;
+    },
+    [addCommentPost.fulfilled](state, action) {
+       const updatedPosts = state.items.map((post) => {
+         if (post._id === action.payload._id) return action.payload;
+         return post;
+       });
+       state.isLoading = false;
+       state.error = null;
+       state.items = updatedPosts;
     },
   },
 });
