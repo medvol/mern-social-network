@@ -50,3 +50,16 @@ export const likePost = createAsyncThunk(
     }
   }
 );
+
+export const addCommentPost = createAsyncThunk(
+  "posts/comment",
+  async ({ comment, postId }, thunkAPI) => {
+    try {
+      const response = await axios.post(`/posts/${postId}/comment`, comment);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+

@@ -6,12 +6,12 @@ import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
 
 const FriendsList = ({ user }) => {
   const [displayedFriends, setDisplayedFriends] = useState(
-    user?.friends?.slice(0, 5)
+    user.friends.slice(0, 5) || []
   );
   const { palette } = useTheme();
 
   useEffect(() => {
-    setDisplayedFriends(user?.friends?.slice(0, 5));
+    setDisplayedFriends(user.friends.slice(0, 5));
   }, [user]);
 
   const handleSeeAllClick = () => {

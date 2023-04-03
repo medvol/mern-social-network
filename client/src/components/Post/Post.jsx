@@ -9,6 +9,7 @@ import {
 import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
 import PostTitle from "components/PostTitle/PostTitle";
+import AddComment from "components/AddComment/AddComment";
 import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
 import { useAuth } from "hooks/useAuth";
 import { likePost } from "state/posts/operations";
@@ -75,6 +76,8 @@ const Post = ({ item }) => {
         </IconButton>
       </FlexBetween>
       {isComments && (
+        <>
+          <AddComment postId={_id}/>
         <Box mt="0.5rem" component="ul">
           {comments.map((comment, i) => (
             <Box key={`${owner.firstName}-${i}`} component="li">
@@ -86,6 +89,8 @@ const Post = ({ item }) => {
           ))}
           <Divider />
         </Box>
+        </>
+        
       )}
     </WidgetWrapper>
   );
