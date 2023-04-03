@@ -12,6 +12,8 @@ export const getUser = async (req, res) => {
   if (!user) {
     throw new NotFound("Not found");
   }
+  user.viewedProfile += 1;
+  await user.save();
 
   res.json(user);
 };
