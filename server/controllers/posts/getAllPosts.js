@@ -18,10 +18,8 @@ export const getAllPosts = async (req, res) => {
         select: " _id firstName lastName occupation picturePath ",
       },
     })
-    .populate(
-      "owner",
-      "_id firstName lastName occupation location picturePath"
-    );
+    .populate("owner", "_id firstName lastName occupation location picturePath")
+    .sort({ createdAt: -1 });
 
   if (!posts) {
     throw new NotFound("Not found posts");
