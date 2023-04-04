@@ -12,9 +12,7 @@ const AddComment = ({ postId }) => {
   const dispatch = useDispatch();
 
   const { palette } = useTheme();
-    const { user } = useAuth();
-    
-    console.log(postId)
+  const { user } = useAuth();
 
   const handleComment = () => {
     if (!content) return;
@@ -23,7 +21,7 @@ const AddComment = ({ postId }) => {
       content: content,
       created_at: Date.now(),
     };
-    dispatch(addCommentPost({comment, postId}));
+    dispatch(addCommentPost({ comment, postId }));
     setContent("");
   };
 

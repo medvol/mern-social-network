@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPosts, getUserPosts, addPost, likePost, addCommentPost } from "./operations";
+import {
+  getAllPosts,
+  getUserPosts,
+  addPost,
+  likePost,
+  addCommentPost,
+} from "./operations";
 
 const initialState = {
   items: [],
@@ -48,22 +54,24 @@ export const postsSlice = createSlice({
       state.items.push(action.payload);
     },
     [likePost.fulfilled](state, action) {
-      const updatedPosts = state.items.map((post) => {
-        if (post._id === action.payload._id) return action.payload;
-        return post;
-      });
+      const commentIndex = state.items.findIndex(
+        (post) => post._id === action.payload._id
+      );
+      if (commentIndex !== -1) {
+        state.items.splice(commentIndex, 1, action.payload);
+      }
       state.isLoading = false;
       state.error = null;
-      state.items = updatedPosts;
     },
     [addCommentPost.fulfilled](state, action) {
-       const updatedPosts = state.items.map((post) => {
-         if (post._id === action.payload._id) return action.payload;
-         return post;
-       });
-       state.isLoading = false;
-       state.error = null;
-       state.items = updatedPosts;
+      const commentIndex = state.items.findIndex(
+        (post) => post._id === action.payload._id
+      );
+      if (commentIndex !== -1) {
+        state.items.splice(commentIndex, 1, action.payload);
+      }
+      state.isLoading = false;
+      state.error = null;
     },
   },
 });
