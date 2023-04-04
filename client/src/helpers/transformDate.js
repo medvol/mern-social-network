@@ -9,7 +9,7 @@ export const transformDate = (createdAt) => {
   const oneWeek = 7 * oneDay;
 
   if (elapsed < oneMinute) {
-    return "Just now";
+    return "just now";
   } else if (elapsed < oneHour) {
     const minutes = Math.floor(elapsed / oneMinute);
     return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;

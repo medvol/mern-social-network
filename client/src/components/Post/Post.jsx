@@ -14,6 +14,7 @@ import Comment from "components/Comment/Comment";
 import WidgetWrapper from "components/WidgetWrapper/WidgetWrapper";
 import { useAuth } from "hooks/useAuth";
 import { likePost } from "state/posts/operations";
+import { sortComments } from "helpers/sortComments";
 
 const Post = ({ item }) => {
   const [isComments, setIsComments] = useState(false);
@@ -22,6 +23,7 @@ const Post = ({ item }) => {
   const { owner, likes, comments, picturePath, description, _id } = item;
   const isLiked = likes.includes(user._id);
   const likeCount = likes.length;
+  const sortedByDateComments = sortComments(comments);
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
@@ -81,7 +83,7 @@ const Post = ({ item }) => {
           <>
             <AddComment postId={_id} />
             <Box component="ul" sx={{ pt: "0.5rem" }}>
-              {comments.map((comment, i) => (
+              {sortedByDateComments.map((comment) => (
                 <Comment key={comment._id} item={comment} />
               ))}
             </Box>
@@ -99,7 +101,7 @@ const Post = ({ item }) => {
           Be the first to react
         </Typography>
       )}
-      {!comments.length && likeCount && (
+      {!comments.length && likeCount > 0 && (
         <Typography
           sx={{
             p: "0.5rem 1rem",
