@@ -23,6 +23,6 @@ router.get("/:id/posts", verifyToken, isValidId, ctrlWrapper(getUserPosts));
 
 router.patch("/:id/like", verifyToken, isValidId, ctrlWrapper(likePost));
 
-router.patch("/:id/comment", verifyToken, isValidId, ctrlWrapper(commentPost));
+router.post("/:id/comment", verifyToken, isValidId, ctrlWrapper(commentPost));
 
 export default router;

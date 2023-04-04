@@ -15,7 +15,18 @@ export const getUserPosts = async (req, res) => {
       skip,
       limit: Number(limit),
     }
-  ).populate("owner", "_id firstName lastName occupation location picturePath");
+  )
+    .populate({
+      path: "comments",
+      populate: {
+        path: "author",
+        select: " _id firstName lastName occupation picturePath ",
+      },
+    })
+    .populate(
+      "owner",
+      "_id firstName lastName occupation location picturePath"
+    );
   console.log(posts);
   if (!posts) {
     throw new NotFound("Not found posts");

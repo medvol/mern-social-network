@@ -10,10 +10,18 @@ export const getAllPosts = async (req, res) => {
   const posts = await Post.find({}, "-createdAt -updatedAt", {
     skip,
     limit: Number(limit),
-  }).populate(
-    "owner",
-    "_id firstName lastName occupation location picturePath"
-  );
+  })
+    .populate({
+      path: "comments",
+      populate: {
+        path: "author",
+        select: " _id firstName lastName occupation picturePath ",
+      },
+    })
+    .populate(
+      "owner",
+      "_id firstName lastName occupation location picturePath"
+    );
 
   if (!posts) {
     throw new NotFound("Not found posts");
