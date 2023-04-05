@@ -7,7 +7,7 @@ export const getAllPosts = async (req, res) => {
   const { page = 1, limit = 20 } = req.query;
   const skip = (page - 1) * limit;
   console.log(limit);
-  const posts = await Post.find({}, "-createdAt -updatedAt", {
+  const posts = await Post.find({}, " -updatedAt", {
     skip,
     limit: Number(limit),
   })
