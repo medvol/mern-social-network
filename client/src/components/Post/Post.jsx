@@ -18,24 +18,52 @@ import { sortComments } from "helpers/sortComments";
 
 const Post = ({ item }) => {
   const [isComments, setIsComments] = useState(false);
+  const [showFullText, setShowFullText] = useState(false);
   const dispatch = useDispatch();
   const { user } = useAuth();
   const { owner, likes, comments, picturePath, description, _id } = item;
   const isLiked = likes.includes(user._id);
   const likeCount = likes.length;
   const sortedByDateComments = sortComments(comments);
+  const truncatedText = description.substring(0, 150);
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
 
+  const handleShowText = () => {
+    setShowFullText(!showFullText);
+  };
+
   return (
     <WidgetWrapper component="li" sx={{ m: "2rem 0", pb: 0, pl: 0, pr: 0 }}>
       <Box pl="1.5rem" pr="1rem">
         <PostTitle owner={owner} />
-        <Typography color={main} sx={{ mt: "1rem" }}>
-          {description}
-        </Typography>
+        {showFullText ? (
+          <Typography color={main} sx={{ mt: "1rem" }}>
+            {description}
+          </Typography>
+        ) : (
+          <Typography onClick={handleShowText} color={main} sx={{ mt: "1rem" }}>
+            {truncatedText}
+            {description.length > 150 && (
+              <Typography
+                component="span"
+                color="white"
+                sx={{
+                  cursor: "pointer",
+                  "&:hover": {
+                    color: "#70b5f9",
+                  },
+                }}
+              >
+                {" "}
+                ...see more
+              </Typography>
+            )}
+          </Typography>
+        )}
+
         {picturePath && (
           <img
             width="100%"
