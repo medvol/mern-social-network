@@ -28,6 +28,7 @@ export const Navbar = () => {
         width: "100vw",
         zIndex: "100",
         borderBottom: `1px solid ${border}`,
+        boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
       }}
     >
       <FlexBetween gap="1.75rem">
