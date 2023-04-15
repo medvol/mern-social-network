@@ -24,6 +24,11 @@ const handleRejected = (state, action) => {
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
+  reducers: {
+    setPosts: (state) => {
+      state.items = [];
+    },
+  },
 
   extraReducers: {
     [getAllPosts.pending]: handlePending,
@@ -33,20 +38,20 @@ export const postsSlice = createSlice({
     [addCommentPost.pending]: handlePending,
 
     [getAllPosts.rejected]: handleRejected,
-    [getUserPosts.pending]: handleRejected,
-    [addPost.pending]: handleRejected,
-    [likePost.pending]: handleRejected,
-    [addCommentPost.pending]: handleRejected,
+    [getUserPosts.rejected]: handleRejected,
+    [addPost.rejected]: handleRejected,
+    [likePost.rejected]: handleRejected,
+    [addCommentPost.rejected]: handleRejected,
 
     [getAllPosts.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.items = action.payload;
+      state.items = [...state.items, ...action.payload];
     },
     [getUserPosts.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.items = action.payload;
+      state.items = [...state.items, ...action.payload];
     },
     [addPost.fulfilled](state, action) {
       state.isLoading = false;
@@ -76,4 +81,5 @@ export const postsSlice = createSlice({
   },
 });
 
+export const { setPosts } = postsSlice.actions;
 export default postsSlice.reducer;

@@ -103,7 +103,15 @@ const UserWidget = ({ user }) => {
 
         <FlexBetween gap="1rem" mb="0.5rem">
           <FlexBetween gap="1rem">
-            <img src="../assets/twitter.png" alt="twitter" />
+            <Box>
+              <img
+                width="30px"
+                height="30px"
+                src="../assets/twitter.png"
+                alt="twitter"
+              />
+            </Box>
+
             <Box>
               <Typography color={main} fontWeight="500">
                 Twitter
@@ -118,7 +126,14 @@ const UserWidget = ({ user }) => {
 
         <FlexBetween gap="1rem">
           <FlexBetween gap="1rem">
-            <img src="../assets/linkedin.png" alt="linkedin" />
+            <Box>
+              <img
+                width="30px"
+                height="30px"
+                src="../assets/linkedin.png"
+                alt="linkedin"
+              />
+            </Box>
             <Box>
               <Typography color={main} fontWeight="500">
                 Linkedin

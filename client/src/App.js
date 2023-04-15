@@ -6,16 +6,16 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
 import { PagePoutes } from "components/PageRoutes/PagePoutes";
-import { useAuth } from "hooks/useAuth";
 import { refreshUser } from "state/auth/operations";
 import Loader from "components/Loader/Loader";
 
 function App() {
-  const { isRefreshing} = useAuth();
   const [cookies, setCookie] = useCookies(["mode"]);
   const dispatch = useDispatch();
 
-  const mode = cookies.mode || "light";
+  // const mode = cookies.mode || "light";
+
+  const mode = useMemo(() => cookies.mode || "light", [cookies.mode]);
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
@@ -27,21 +27,17 @@ function App() {
 
   useEffect(() => {
     dispatch(refreshUser());
-  }, [dispatch ]);
+  }, [dispatch]);
 
-  return isRefreshing ? (
-    <Loader />
-  ) : (
-    <div>
-      <BrowserRouter>
-        <Suspense fallback={null}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <PagePoutes />
-          </ThemeProvider>
-        </Suspense>
-      </BrowserRouter>
-    </div>
+  return (
+    <BrowserRouter>
+      <Suspense fallback={<Loader />}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <PagePoutes />
+        </ThemeProvider>
+      </Suspense>
+    </BrowserRouter>
   );
 }
 

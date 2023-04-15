@@ -27,7 +27,11 @@ export default function HomePage() {
         }}
       >
         <Logo />
-        <FlexBetween gap="2rem">
+        <FlexBetween
+          sx={{
+            gap: `${isNonMobileScreens ? "2rem" : "0.5rem"}`,
+          }}
+        >
           <Button
             component={RouterLink}
             to="/register"
@@ -53,27 +57,43 @@ export default function HomePage() {
           alignItems: `${isNonMobileScreens ? "start" : "none"}`,
           width: "100%",
           px: "6%",
+          pb: `${isNonMobileScreens ? "0" : "10rem"}`,
+          textAlign: "center",
           backgroundColor: "white",
         }}
       >
         <Box
           sx={{
             display: "flex",
-            gap: "1rem",
+            gap: "2rem",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "space-between",
-            pt: `${isNonMobileScreens ? "12rem" : "1rem"}`,
+            py: `${isNonMobileScreens ? "12rem" : "5rem"}`,
             px: "1rem",
           }}
         >
           <Typography variant="h1">Quickly find some friends!</Typography>
-          <Button variant="contained" component={RouterLink} to="/register">
+          <Button
+            variant="contained"
+            size="large"
+            component={RouterLink}
+            to="/register"
+          >
             Join now
           </Button>
         </Box>
-        <Box sx={{ flexBasis: "60%", overflow: "hidden" }}>
-          <img src={backgroundImage} alt="people communicate" />
+        <Box sx={{ maxHeight: "50%", flexBasis: "60%", overflow: "hidden" }}>
+          <img
+            src={backgroundImage}
+            alt="people communicate"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              overflow: "hidden",
+            }}
+          />
         </Box>
       </FlexBetween>
     </Box>

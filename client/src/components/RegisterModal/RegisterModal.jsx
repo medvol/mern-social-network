@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Box, Button, Typography, Modal, useTheme } from "@mui/material";
+import { Box, Button, Typography, Modal} from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "hooks/useAuth";
 
@@ -26,24 +25,11 @@ export function RegisterModal({open, handleClose}) {
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
   const {user} = useAuth();
-  const { palette } = useTheme();
+
   
   return (
     <div>
-      {/* <Button
-        fullWidth
-        type="submit"
-        onClick={handleOpen}
-        sx={{
-          m: "2rem 0",
-          p: "1rem",
-          backgroundColor: palette.primary.main,
-          color: palette.background.alt,
-          "&:hover": { color: palette.primary.main },
-        }}
-      >
-        "REGISTER"
-      </Button> */}
+   
       <Modal
         open={open}
         onClose={handleClose}

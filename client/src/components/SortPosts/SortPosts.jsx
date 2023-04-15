@@ -24,7 +24,7 @@ const SortPosts = ({ handleSort }) => {
   };
 
   return (
-    <Box sx={{ position: "relative", mt: "1rem" }}>
+    <Box sx={{ position: "relative", mt: "0.5rem" }}>
       <Box textAlign="right">
         <Typography
           component="span"

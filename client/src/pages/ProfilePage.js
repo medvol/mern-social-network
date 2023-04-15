@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { Box, Toolbar, Typography, useMediaQuery } from "@mui/material";
 import Navbar from "components/Navbar/Navbar";
 import FriendsList from "components/FriendsList/FriendsList";
@@ -11,27 +12,56 @@ import BackToTop from "components/BackToTop/BackToTop";
 import { useDispatch } from "react-redux";
 import { getUserPosts } from "state/posts/operations";
 import { usePosts } from "hooks/usePosts";
+import { setPosts } from "state/posts/postsSlice";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const { userId } = useParams();
   const dispatch = useDispatch();
-  const { posts, isLoading} = usePosts();
+  const { posts, isLoading } = usePosts();
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   useEffect(() => {
+    const abortController = new AbortController();
     const getUser = async () => {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/users/${userId}`
-      );
-      setUser(data);
+      try {
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/users/${userId}`,
+          {
+            signal: abortController.signal,
+          }
+        );
+        setUser(data);
+      } catch (error) {
+        if (error.name === "AbortError") return;
+      }
     };
+
     getUser();
+
+    return () => abortController.abort();
   }, [userId]);
 
   useEffect(() => {
-    dispatch(getUserPosts(userId));
+    const abortController = new AbortController();
+    dispatch(setPosts());
+    dispatch(getUserPosts({ userId, abort: abortController.signal }));
+
+    return () => abortController.abort();
   }, [dispatch, userId]);
+
+  const fetchUserPosts = async () => {
+    const response = await dispatch(getUserPosts({ userId, page: page + 1 }));
+
+    if (response.payload.length === 0) {
+      setHasMore(false);
+      return;
+    }
+
+    setPage(page + 1);
+  };
 
   if (!user) return;
 
@@ -59,7 +89,20 @@ const ProfilePage = () => {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <AddPostWidget />
-          <PostList />
+          <InfiniteScroll
+            dataLength={posts.length}
+            next={fetchUserPosts}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
+          >
+            <PostList />
+          </InfiniteScroll>
+
           {!posts.length && !isLoading && (
             <Typography
               variant="h6"

@@ -13,12 +13,13 @@ const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 export const PagePoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />}/>
+      <Route path="/" element={<HomePage />} />
       <Route element={<RestrictedRoute redirectTo="/main" />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Route>
-      <Route element={<PrivateRoute redirectTo="/" />}>
+
+      <Route element={<PrivateRoute redirectTo="/login" />}>
         <Route path="/main" element={<MainPage />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
       </Route>

@@ -1,7 +1,7 @@
 import { useCookies } from "react-cookie";
 import { IconButton, useTheme } from "@mui/material";
 import { DarkMode, LightMode } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+
 
 export const ModeButton = () => {
   // const dispatch = useDispatch();

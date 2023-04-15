@@ -10,18 +10,24 @@ const RecommendedUsers = () => {
   const { palette } = useTheme();
 
   useEffect(() => {
+    const abortController = new AbortController();
     const getRecommendedUsers = async () => {
       try {
         setError(false);
         const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/users/recommended`
+          `${process.env.REACT_APP_BASE_URL}/users/recommended`,
+          {
+            signal: abortController.signal,
+          }
         );
         setUsers(data);
       } catch (error) {
+        if (error.name === "AbortError") return;
         setError(true);
       }
     };
     getRecommendedUsers();
+    return () => abortController.abort();
   }, []);
 
   return (

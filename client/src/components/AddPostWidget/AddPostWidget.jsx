@@ -55,14 +55,14 @@ const AddPostWidget = () => {
 
   return (
     <WidgetWrapper sx={{ pb: "0.5rem" }}>
-      <FlexBetween gap="1.5rem">
+      <FlexBetween gap="1rem">
         <UserImage picturePath={user.picturePath} />
         <InputBase
           placeholder="What's on your mind..."
           onChange={(e) => setPost(e.target.value)}
           value={post}
           sx={{
-            width: "100%",
+            width: "85%",
             height:"auto",
             backgroundColor: palette.neutral.light,
             borderRadius: "2rem",
