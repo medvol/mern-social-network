@@ -46,7 +46,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
-    dispatch(setPosts());
+    dispatch(setPosts([]));
     dispatch(getUserPosts({ userId, abort: abortController.signal }));
 
     return () => abortController.abort();

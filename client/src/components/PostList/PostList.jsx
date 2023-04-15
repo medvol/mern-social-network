@@ -4,10 +4,13 @@ import Post from "components/Post/Post";
 import Loader from "components/Loader/Loader";
 import SortPosts from "components/SortPosts/SortPosts";
 import { usePosts } from "hooks/usePosts";
+import { setPosts } from "state/posts/postsSlice";
+import { useDispatch } from "react-redux";
 
 const PostList = () => {
   const { posts, isLoading, error } = usePosts();
   const [filteredPosts, setfilteredPosts] = useState(posts);
+  const dispatch = useDispatch();
   // console.log(filteredPosts,'filtered posts')
 
   // useEffect(() => {
@@ -22,7 +25,7 @@ const PostList = () => {
         return new Date(b.createdAt) - new Date(a.createdAt);
       }
     });
-    setfilteredPosts(sortedPosts);
+    dispatch(setPosts(sortedPosts));
   };
 
   return (
