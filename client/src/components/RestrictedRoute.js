@@ -4,7 +4,8 @@ import { useAuth } from "hooks/useAuth";
 export const RestrictedRoute = ({ redirectTo = "/" }) => {
   const location = useLocation()
   const { isLoggedIn } = useAuth();
+  console.log(location);
 
-  if (isLoggedIn) return <Navigate to={location.state.from || redirectTo} />;
+  if (isLoggedIn) return <Navigate to={location.state?.from || redirectTo} />;
   return <Outlet />;
 };
