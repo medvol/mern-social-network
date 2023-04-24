@@ -47,7 +47,7 @@ export const RegisterForm = () => {
 
     try {
       const response = await dispatch(register(formData));
-      // toggleModal();
+
       if (response) setShowModal(!showModal);
     } catch (error) {
       console.log(error);

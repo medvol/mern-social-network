@@ -1,4 +1,4 @@
-import { Box, Button, Typography, Modal} from "@mui/material";
+import { Box, Button, Typography, Modal } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "hooks/useAuth";
 
@@ -8,28 +8,23 @@ const style = {
   left: "50%",
   width: 400,
   height: 300,
-  display: 'flex',
-  flexDirection:'column',
+  display: "flex",
+  flexDirection: "column",
   alignItems: "center",
-  justifyContent:"center",
-  p: 4, 
+  justifyContent: "center",
+  p: 4,
   bgcolor: "background.paper",
   border: "1px solid #000",
   boxShadow: 24,
-  borderRadius:"1rem",
+  borderRadius: "1rem",
   transform: "translate(-50%, -50%)",
 };
 
-export function RegisterModal({open, handleClose}) {
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-  const {user} = useAuth();
+export function RegisterModal({ open, handleClose }) {
+  const { user } = useAuth();
 
-  
   return (
     <div>
-   
       <Modal
         open={open}
         onClose={handleClose}

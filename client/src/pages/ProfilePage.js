@@ -60,7 +60,7 @@ const ProfilePage = () => {
       return;
     }
 
-    setPage(page + 1);
+    setPage(prevPage=> prevPage + 1);
   };
 
   if (!user) return;

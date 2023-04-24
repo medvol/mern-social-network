@@ -2,11 +2,8 @@ import { useCookies } from "react-cookie";
 import { IconButton, useTheme } from "@mui/material";
 import { DarkMode, LightMode } from "@mui/icons-material";
 
-
 export const ModeButton = () => {
-  // const dispatch = useDispatch();
   const theme = useTheme();
-  // const mode = localStorage.getItem("mode");
 
   const [cookies, setCookie] = useCookies(["mode"]);
 
@@ -15,24 +12,11 @@ export const ModeButton = () => {
   const handleMode = () => {
     if (cookies.mode === "light") {
       setCookie("mode", "dark", { path: "/" });
-      // dispatch(setMode());
     }
     if (cookies.mode === "dark") {
       setCookie("mode", "light", { path: "/" });
-      // dispatch(setMode());
     }
   };
-
-  // const handleMode = () => {
-  //   if (mode === "light") {
-  //     localStorage.setItem("mode", "dark");
-  //     dispatch(setMode());
-  //   }
-  //   if (mode === "dark") {
-  //     localStorage.setItem("mode", "light");
-  //     dispatch(setMode());
-  //   }
-  // };
 
   return (
     <IconButton onClick={handleMode}>

@@ -1,21 +1,13 @@
-import { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Post from "components/Post/Post";
-import Loader from "components/Loader/Loader";
 import SortPosts from "components/SortPosts/SortPosts";
 import { usePosts } from "hooks/usePosts";
 import { setPosts } from "state/posts/postsSlice";
 import { useDispatch } from "react-redux";
 
 const PostList = () => {
-  const { posts, isLoading, error } = usePosts();
-  const [filteredPosts, setfilteredPosts] = useState(posts);
+  const { posts, error } = usePosts();
   const dispatch = useDispatch();
-  // console.log(filteredPosts,'filtered posts')
-
-  // useEffect(() => {
-  //   setfilteredPosts(posts);
-  // }, [posts]);
 
   const handleSort = (value) => {
     const sortedPosts = [...posts].sort((a, b) => {
@@ -30,7 +22,6 @@ const PostList = () => {
 
   return (
     <>
-      {/* {isLoading && <Loader />} */}
       {error && (
         <Typography variant="h6" fontWeight="400" sx={{ textAlign: "center" }}>
           Something went wrong... Please, try later.
@@ -42,13 +33,6 @@ const PostList = () => {
           <Post key={post._id} item={post} />
         ))}
       </Box>
-      {/* {!isLoading && filteredPosts.length > 0 && (
-        <Box component="ul">
-          {filteredPosts.map((post) => (
-            <Post key={post._id} item={post} />
-          ))}
-        </Box>
-      )} */}
     </>
   );
 };
