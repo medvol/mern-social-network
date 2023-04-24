@@ -61,15 +61,4 @@ postSchema.post("save", handleMongooseError);
 
 const Post = mongoose.model("Post", postSchema);
 
-// export const addPostSchema = Joi.object({
-//   description: Joi.string().required().min(2).max(250),
-//   picturePath: Joi.string(),
-//   likes: Joi.string().alphanum().length(24),
-//   comments: Joi.object({
-//     author: Joi.string().alphanum().required(),
-//     content: Joi.string().required(),
-//     created_at: Joi.date().required(),
-//   }),
-// });
-
 export default Post;

@@ -6,7 +6,7 @@ const { NotFound } = errors;
 
 export const getUserPosts = async (req, res) => {
   const { id } = req.params;
-  const { page = 1, limit = 20 } = req.query;
+  const { page = 1, limit = 3 } = req.query;
   const skip = (page - 1) * limit;
   const posts = await Post.find(
     { owner: id },
