@@ -70,6 +70,7 @@ export const RegisterForm = () => {
           handleSubmit,
           setFieldValue,
           resetForm,
+          isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
             <Box
@@ -190,7 +191,7 @@ export const RegisterForm = () => {
                   "&:hover": { color: palette.primary.main },
                 }}
               >
-                REGISTER
+                {isSubmitting ? "Submitting..." : "Register"}
               </Button>
               <Typography
                 onClick={() => {
