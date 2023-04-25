@@ -63,6 +63,7 @@ export const LoginForm = () => {
           handleChange,
           handleSubmit,
           resetForm,
+          isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
             <Box
@@ -101,6 +102,7 @@ export const LoginForm = () => {
               <Button
                 fullWidth
                 type="submit"
+                disabled={isSubmitting || Object.keys(errors).length > 0}
                 sx={{
                   m: "2rem 0",
                   p: "1rem",
@@ -109,7 +111,7 @@ export const LoginForm = () => {
                   "&:hover": { color: palette.primary.main },
                 }}
               >
-                LOGIN
+                {isSubmitting ? "Submitting..." : "Login"}
               </Button>
               <Typography
                 onClick={() => {
