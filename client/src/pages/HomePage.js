@@ -1,29 +1,24 @@
 import { Link as RouterLink } from "react-router-dom";
-import {
-  Box,
-  useMediaQuery,
-  Button,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, useMediaQuery, Button, Typography } from "@mui/material";
 import { Logo } from "components/Logo/Logo";
 import { FlexBetween } from "components/FlexBetween/FlexBetween.styled";
-import backgroundImage from "assets/homepage_image.jpg";
+import backgroundImage from "assets/homepage_image.png";
 
 export default function HomePage() {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
-  const theme = useTheme();
-  const border = theme.palette.divider;
-
   return (
-    <Box>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        background:
+          "radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%)",
+      }}
+    >
       <FlexBetween
         component="header"
         sx={{
           padding: "0.5rem 6% 0.5rem",
-          borderBottom: `1px solid ${border}`,
-          boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
         }}
       >
         <Logo />
@@ -53,13 +48,12 @@ export default function HomePage() {
         component="main"
         sx={{
           display: `${isNonMobileScreens ? "flex" : "block"}`,
-          gap: "0.5rem",
-          alignItems: `${isNonMobileScreens ? "start" : "none"}`,
+          alignItems: `${isNonMobileScreens ? "center" : "none"}`,
           width: "100%",
-          px: "6%",
-          pb: `${isNonMobileScreens ? "0" : "10rem"}`,
+          gap: `${isNonMobileScreens ? "0" : "1.5rem"}`,
+          px: `${isNonMobileScreens ? "12%" : "6%"}`,
+          pt: `${isNonMobileScreens ? "12rem" : "5rem"}`,
           textAlign: "center",
-          backgroundColor: "white",
         }}
       >
         <Box
@@ -69,27 +63,46 @@ export default function HomePage() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "space-between",
-            py: `${isNonMobileScreens ? "12rem" : "5rem"}`,
+            mb: `${isNonMobileScreens ? "0" : "7rem"}`,
             px: "1rem",
           }}
         >
-          <Typography variant="h1">Quickly find some friends!</Typography>
+          <Typography
+            variant="h1"
+            sx={{
+              background:
+                "linear-gradient(89.97deg, #AE67FA 1.84%, #F49867 102.67%)",
+              backgroundClip: "text",
+              textFillColor: "transparent",
+            }}
+          >
+            Quickly find some friends!
+          </Typography>
           <Button
             variant="contained"
             size="large"
             component={RouterLink}
             to="/register"
+            sx={{ backgroundColor: "#FF4820", color: "#FFFFFF" }}
           >
             Join now
           </Button>
         </Box>
-        <Box sx={{ maxHeight: "50%", flexBasis: "60%", overflow: "hidden" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexBasis: "50%",
+            justifyContent: "center",
+            alignItems: "center",
+            overflow: "hidden",
+          }}
+        >
           <img
             src={backgroundImage}
             alt="people communicate"
             style={{
-              width: "100%",
-              height: "100%",
+              width: "70%",
+              height: "70%",
               objectFit: "contain",
               overflow: "hidden",
             }}
